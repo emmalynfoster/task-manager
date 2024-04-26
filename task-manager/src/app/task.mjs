@@ -84,57 +84,66 @@ export class Task {
 
     async updateTask(data){
         //Begin the transaction
-        db.run("BEGIN TRANSACTION");
+        await db.run("BEGIN TRANSACTION");
 
         try {
-            //Check that data is an Object
+            //Check that data is an Object]
+            console.log("hello")
+            console.log(data)
             if ((data !== undefined) && (data instanceof Object)) {
-
+                console.log("hello")
                 /*We are now checking whether the person provided no value or the same value as before the update 
                 If they did then we do not want that query to be in the transaction becasue it wont go through
                 No need to check the type of the value becasue if it is the wrong type, the query will fail and the none 
                 of the changes in the transaction will be commited*/
+                
+                
+                
                 if(data.title !== undefined && data.title !== this.#title) {
-                    db.run('UPDATE tasks SET title = ? WHERE id = ?', data.title, this.id);
+                    await db.run('UPDATE tasks SET title = ? WHERE id = ?', data.title, this.id);
                     this.setTitle(data.title);
                 } 
                 
                 if(data.description !== undefined && data.description !== this.#description) {
-                    db.run('UPDATE tasks SET description = ? WHERE id = ?', data.description, this.id);
+                    await db.run('UPDATE tasks SET description = ? WHERE id = ?', data.description, this.id);
                     this.setDescription(data.desciption);
                 }
 
                 if(data.due_date !== undefined && data.due_date !== this.#due_date) {
-                    db.run('UPDATE tasks SET due_date = ? WHERE id = ?', data.due_date, this.id);
+                    await db.run('UPDATE tasks SET due_date = ? WHERE id = ?', data.due_date, this.id);
                     this.setDueDate(data.due_date);
                 }
 
                 if(data.category !== undefined && data.category !== this.#category) {
-                    db.run('UPDATE tasks SET category = ? WHERE id = ?', data.category, this.id);
+                    await db.run('UPDATE tasks SET category = ? WHERE id = ?', data.category, this.id);
                     this.setCategory(data.category);
                 }
 
                 if(data.completed !== undefined && data.completed !== this.#completed) {
-                    db.run('UPDATE tasks SET complete = ? WHERE id = ?', data.complete, this.id);
+                    await db.run('UPDATE tasks SET complete = ? WHERE id = ?', data.complete, this.id);
                     this.setCompleted(data.completed);
                 }
+                // await db.run('UPDATE tasks SET title = ?,description=?, due_date=?, completed=?, category=?  WHERE id = ?', data.title, data.description, data.due_date, data.completed, data.category, this.id);
+
+
+
             } else {
                 //If data is not an Object, return
                 return;
             }
 
             //If there are no errors, commit all changes made during transaction and update the values in the object
-            db.run("COMMIT");
+            await db.run("COMMIT"); //NOT COMMITING???? 'this' changes but they're not actually reflected in the db
+            return this
 
         }
 
         catch (e) {
             //If there are any errors, rollback all the changes made in the transaction
             db.run("ROLLBACK");
-            return;
+            return null;
         }
 
-        return;
     }         
         
             // Ensure that new data is not undefined, is the correct type and does not match its current value to update

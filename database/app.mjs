@@ -34,11 +34,25 @@ app.post('/tasks', async (req, res) => {
 })
 
 app.put('/tasks/:id', async (req, res) => {
-    // implement
+    let task = await Task.getTask(req.params.id);
+    if (!task) {
+        res.status(404).send("Task not found");
+        return
+    }
+    console.log(task)
+    let new_task = await task.updateTask(req.body)
+    res.status(200).json(new_task.json())
 })
 
 app.delete('/tasks/:id', async (req, res) => {
     //implement
+    let deleted = await Task.deleteTask(req.params.id)
+    if(deleted){
+        res.status(200).send("task deleted")
+        return
+    }
+    res.status(400).send("delete failed")
+    
 })
 
 
