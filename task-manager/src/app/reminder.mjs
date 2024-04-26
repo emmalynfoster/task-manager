@@ -1,4 +1,4 @@
-import {db} from '../database/db.mjs';
+import {db} from '../../../database/db.mjs';
 
 export class Note {
 

@@ -1,4 +1,4 @@
-import {db} from '../database/db.mjs';
+import {db} from '../../../database/db.mjs';
 
 export class Task {
 
@@ -73,98 +73,62 @@ export class Task {
                 return new Task(row.id, row.title, row.description, row.due_date, row.complete, row.category);
             }
         } 
-        
         catch (e) { return null; }
     }
-
-    /*  This is not complete, as the function works right now it can result in unwanted behavior where if any field 
-        can be updated but if another field fails, the valid ones will be updated in the table but the invalid ones 
-        stay unchanged when ideally you would want all or nothing. The setters method themselves work but are missing
-        validation.
-        */
-       // One way to fix this is by starting a transaction on the db which will only commit the changes if all the queriers go through
 
     async updateTask(data){
         //Begin the transaction
         db.run("BEGIN TRANSACTION");
 
         try {
-            //Check that data is an Object
+            // Check that data is an Object
             if ((data !== undefined) && (data instanceof Object)) {
+                /* We are now checking whether the person provided no value or the same value as before the update 
+                if they did then we do not want that query to be in the transaction becasue it wont go through
+                no need to check the type of the value becasue if it is the wrong type, the query will fail and the none 
+                of the changes in the transaction will be commited */
 
-                /*We are now checking whether the person provided no value or the same value as before the update 
-                If they did then we do not want that query to be in the transaction becasue it wont go through
-                No need to check the type of the value becasue if it is the wrong type, the query will fail and the none 
-                of the changes in the transaction will be commited*/
-                if(data.title !== undefined && data.title !== this.#title) {
+                if(data.title !== undefined && (typeof data.title == 'string') && data.title !== this.#title) {
                     db.run('UPDATE tasks SET title = ? WHERE id = ?', data.title, this.id);
                     this.setTitle(data.title);
                 } 
                 
-                if(data.desciption !== undefined && data.description !== this.#description) {
+                if(data.description !== undefined && (typeof data.description == 'string') && data.description !== this.#description) {
                     db.run('UPDATE tasks SET description = ? WHERE id = ?', data.description, this.id);
-                    this.setDescription(data.desciption);
+                    this.setDescription(data.desrciption);
                 }
 
-                if(data.due_date !== undefined && data.due_date !== this.#due_date) {
+                if(data.due_date !== undefined && (typeof data.due_date == 'string') && data.due_date !== this.#due_date) {
                     db.run('UPDATE tasks SET due_date = ? WHERE id = ?', data.due_date, this.id);
                     this.setDueDate(data.due_date);
                 }
 
-                if(data.category !== undefined && data.category !== this.#category) {
+                if(data.category !== undefined && (data.category in categories) && data.category !== this.#category) {
                     db.run('UPDATE tasks SET category = ? WHERE id = ?', data.category, this.id);
                     this.setCategory(data.category);
                 }
 
-                if(data.completed !== undefined && data.completed !== this.#completed) {
+                if(data.completed !== undefined && (data.completed in [0,1]) && data.completed !== this.#completed) {
                     db.run('UPDATE tasks SET complete = ? WHERE id = ?', data.complete, this.id);
                     this.setCompleted(data.completed);
                 }
             } else {
-                //If data is not an Object, return
+                // If data is not an Object, return
                 return;
             }
 
-            //If there are no errors, commit all changes made during transaction and update the values in the object
+            // If there are no errors, commit all changes made during transaction and update the values in the object
             db.run("COMMIT");
 
         }
 
         catch (e) {
-            //If there are any errors, rollback all the changes made in the transaction
+            // If there are any errors, rollback all the changes made in the transaction
             db.run("ROLLBACK");
             return;
         }
-
         return;
-    }         
-        
-            // Ensure that new data is not undefined, is the correct type and does not match its current value to update
-    //         if (data.title !== undefined && (typeof data.title == 'string') && data.title !== this.#title){
-    //             this.setTitle(data.title);
-    //         }
-
-    //         if (data.description !== undefined && (typeof data.description == 'string') && data.description !== this.#description){
-    //             this.setDescription(data.description);
-    //         }
-
-    //         if (data.due_date !== undefined && (typeof data.due_date == 'string') && data.due_date !== this.#due_date){
-    //             this.setDueDate(data.due_date);
-    //         }
-
-    //         if (data.category !== undefined && (typeof data.category == 'string') && data.category !== this.#category && data.category in categories){
-    //             this.setCategory(data.category);
-    //         }
-
-    //         if (data.completed !== undefined && Number.isInteger (data.completed) && data.completed !== this.#completed){
-    //             this.setCompleted(data.completed);
-    //         }
-
-    //     }
-
-    //     return;
-    // }
-
+    }
 
     static async deleteTask(id){
         try {
@@ -213,29 +177,29 @@ export class Task {
     }
 
     // Setters no need for the db queries in here anymore
-
-    async setTitle(new_title) {
+    
+    setTitle(new_title) {
         this.#title = new_title;
         return;
     }
 
-    async setDescription(new_description) {
+    setDescription(new_description) {
         this.#description = new_description;
         return;
     }
 
-    async setDueDate(new_due_date) {
+    setDueDate(new_due_date) {
         this.#due_date = new_due_date;
         return;
        
     }
 
-    async setCompleted(new_completed) {
+    setCompleted(new_completed) {
         this.#completed = new_completed;
         return;
     }
 
-    async setCategory(new_category) {
+    setCategory(new_category) {
         this.#category = new_category;
         return true;
     }
