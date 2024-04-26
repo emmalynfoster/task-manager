@@ -1,0 +1,79 @@
+html{
+    font-family: OpenSans, sans-serif;
+}
+
+.widget-container{
+    width: 210px;
+    height:180px;
+    border: solid #9E8EDE 5px;
+    border-radius: 10px;
+    background-color: #9E8EDE;
+    display: flex;
+    flex-direction: column;
+    padding: 0%;
+    margin: none;
+    justify-content: stretch;
+}
+
+.name-and-category{
+    flex-direction: row;
+    display:flex;
+    padding:0%;
+    margin:0%;
+}
+
+.name-and-category > p{
+    font-size: 15px;
+}
+
+.task-name{
+    margin-right:50px;
+    padding-right: 3px;
+}
+
+.widget-container > div > p {
+    font-size: 15px;
+    align-self: left;
+    margin-left: 3px;
+    padding:0%;
+    margin-bottom:3%;
+}
+
+.widget-container > p {
+    font-size: 15px;
+    align-self: left;
+    margin-left: 3px;
+    padding:0%;
+    margin-top:0%;
+    margin-bottom:3%;
+}
+
+.category-icon {
+    width: 9px;
+    height: 9px;
+    margin-right: 5px;
+    margin-top: 17px;
+}
+
+.button-container{
+    display:flex;
+    justify-items: flex-end;
+    justify-content:space-between;
+    padding-left: 5px;
+    padding-right:5px;
+}
+
+.edit-button{
+    width: 40px;
+    height: 30px;
+    margin-top:35px;
+
+}   
+
+.check-button{
+    width: 15px;
+    height: 15px;
+    border-radius: 0px;
+    border-width: 0px;
+    margin-top: 50px;
+}
