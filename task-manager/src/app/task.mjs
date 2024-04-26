@@ -1,4 +1,4 @@
-import {db} from '../database/db.mjs';
+import {db} from '../../../database/db.mjs';
 
 export class Task {
 
@@ -18,7 +18,7 @@ export class Task {
         this.#category = category;
     }
 
-    categories = {
+    static categories = {
         HOME: "Home",
         WORK: "Work",
         SCHOOL: "School"
@@ -32,8 +32,7 @@ export class Task {
         && (data.completed !== undefined) && (typeof data.title == 'string')
         && (typeof data.description == 'string') && (typeof data.due_date == 'string')
         && (typeof data.category == 'string') && (data.completed in [0,1]) 
-        && data.category in categories) {
-
+        && data.category in Task.categories) {
             try {
                 let db_result = await db.run('Insert into tasks values (NULL, ?, ?, ?, ?, ?)', data.title, data.description, data.due_date, data.completed, data.category);
                 let task = new Task(db_result.lastID, data.title, data.description, data.due_date, data.completed, data.category);
@@ -47,19 +46,19 @@ export class Task {
 
     static async getAllIDs(){
         try {
-            let rows = await db.all('Select id from tasks');
-            return rows.map(r => r.id);
+            let rows = (await db.all('SELECT id FROM tasks'));
+            return rows.map((r) => r.id);
         } 
-        catch (e) { return []; }
+        catch (e) { 
+            return []; }
     }
 
     static async getAllTasks(){
         let tasks = [];
         try {
-            for (id in getAllIDs()){
-                tasks.push(getTask(id))
-            }
-            return tasks;
+            tasks = await db.all("SELECT * from tasks")
+            console.log(tasks[0])
+            return tasks.map((item)=> new Task(item.id, item.title, item.description, item.due_date, item.complete, item.category));
         }
         catch (e) { return []; }
     }
@@ -101,7 +100,7 @@ export class Task {
                     this.setTitle(data.title);
                 } 
                 
-                if(data.desciption !== undefined && data.description !== this.#description) {
+                if(data.description !== undefined && data.description !== this.#description) {
                     db.run('UPDATE tasks SET description = ? WHERE id = ?', data.description, this.id);
                     this.setDescription(data.desciption);
                 }
