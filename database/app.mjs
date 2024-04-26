@@ -33,8 +33,42 @@ app.post('/tasks', async (req, res) => {
 
 })
 
+app.put('/tasks/:id', async (req, res) => {
+    // implement
+})
+
+app.delete('/tasks/:id', async (req, res) => {
+    //implement
+})
+
+
+// REMINDER API
+app.get('/reminders', async (req, res) => {
+    let result = await Reminder.getAllReminders()
+    res.json(result.map((reminder)=> reminder.json()))
+})
+
+app.get('/reminders/:id', async (req, res) => {
+    let result = await Reminder.getReminder(req.params.id)
+    res.json(result.json())
+})
+
+app.post('/reminders', async (req, res) => {
+    let reminder = await Reminder.create(req.body);
+
+    if(!reminder) {
+        res.status(400).send("bad request");
+        return;
+    }
+    
+    res.status(201).json(reminder.json())
+
+})
+
+app.delete('/reminders/:id', async (req, res) => {
+    //implement
+})
+
 app.listen(port, () => {
     console.log('Running...');
 })
-
-// REMINDER API

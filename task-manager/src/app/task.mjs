@@ -57,7 +57,6 @@ export class Task {
         let tasks = [];
         try {
             tasks = await db.all("SELECT * from tasks")
-            console.log(tasks[0])
             return tasks.map((item)=> new Task(item.id, item.title, item.description, item.due_date, item.complete, item.category));
         }
         catch (e) { return []; }
