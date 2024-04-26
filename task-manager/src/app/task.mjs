@@ -84,7 +84,7 @@ export class Task {
         */
        // One way to fix this is by starting a transaction on the db which will only commit the changes if all the queriers go through
 
-    updateTask(data){
+    async updateTask(data){
         //Begin the transaction
         db.run("BEGIN TRANSACTION");
 
@@ -98,30 +98,36 @@ export class Task {
                 of the changes in the transaction will be commited*/
                 if(data.title !== undefined && data.title !== this.#title) {
                     db.run('UPDATE tasks SET title = ? WHERE id = ?', data.title, this.id);
+                    this.setTitle(data.title);
                 } 
                 
                 if(data.desciption !== undefined && data.description !== this.#description) {
                     db.run('UPDATE tasks SET description = ? WHERE id = ?', data.description, this.id);
+                    this.setDescription(data.desciption);
                 }
 
                 if(data.due_date !== undefined && data.due_date !== this.#due_date) {
                     db.run('UPDATE tasks SET due_date = ? WHERE id = ?', data.due_date, this.id);
+                    this.setDueDate(data.due_date);
                 }
 
                 if(data.category !== undefined && data.category !== this.#category) {
                     db.run('UPDATE tasks SET category = ? WHERE id = ?', data.category, this.id);
+                    this.setCategory(data.category);
                 }
 
-                if(data.complete !== undefined && data.complete !== this.#complete) {
+                if(data.completed !== undefined && data.completed !== this.#completed) {
                     db.run('UPDATE tasks SET complete = ? WHERE id = ?', data.complete, this.id);
+                    this.setCompleted(data.completed);
                 }
             } else {
                 //If data is not an Object, return
                 return;
             }
 
-            //If there are no errors, commit all changes made during transaction
+            //If there are no errors, commit all changes made during transaction and update the values in the object
             db.run("COMMIT");
+
         }
 
         catch (e) {
@@ -206,55 +212,31 @@ export class Task {
         }
     }
 
-    // Setters
+    // Setters no need for the db queries in here anymore
 
     async setTitle(new_title) {
-        try {
-            await db.run('Update tasks set title = ? where id = ?', new_title, this.#id);
-            this.#title = new_title;
-            return true;
-        } catch (e) {
-            return false;
-        }
+        this.#title = new_title;
+        return;
     }
 
     async setDescription(new_description) {
-        try {
-            await db.run('Update tasks set description = ? where id = ?', new_description, this.#id);
-            this.#description = new_description;
-            return true;
-        } catch (e) {
-            return false;
-        }
+        this.#description = new_description;
+        return;
     }
 
     async setDueDate(new_due_date) {
-        try {
-            await db.run('Update tasks set due_date = ? where id = ?', new_due_date, this.#id);
-            this.#due_date = new_due_date;
-            return true;
-        } catch (e) {
-            return false;
-        }
+        this.#due_date = new_due_date;
+        return;
+       
     }
 
     async setCompleted(new_completed) {
-        try {
-            await db.run('Update tasks set complete = ? where id = ?', new_completed, this.#id);
-            this.#completed = new_completed;
-            return true;
-        } catch (e) {
-            return false;
-        }
+        this.#completed = new_completed;
+        return;
     }
 
     async setCategory(new_category) {
-        try {
-            await db.run('Update tasks set category = ? where id = ?', new_category, this.#id);
-            this.#category = new_category;
-            return true;
-        } catch (e) {
-            return false;
-        }
+        this.#category = new_category;
+        return true;
     }
 }
