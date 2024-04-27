@@ -9,11 +9,14 @@
         </svg>
         <p>School</p>
     </div>
-    <p>4/30/2024</p>
+    <p>Due Date: 4/30/2024</p>
     <p>Make widget for project</p>
     <div class="button-container">
-        <button class="check-button"></button>
-        <button (click)="navigateToEdit()" class="edit-button">Edit</button>
+        <label class="container">    
+            <input type="checkbox" class="checkbox">
+            <span class="checkmark"></span>
+        </label>
+        <button (click)="navigateToEdit()" class="edit-button"><strong>Edit</strong></button>
     </div>
   
 </div>

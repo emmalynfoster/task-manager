@@ -1,4 +1,33 @@
-<!DOCTYPE html>
-<html>
-    <body>Hello world</body>
-</html>
+<div class="navbar">
+    <span class="page-name">Task Editor</span>
+</div>
+
+<form [formGroup]="task_editor_form">
+    <mat-card class="mat-mdc-card">
+        <mat-label class="mat-label">Task Name*</mat-label>
+        <mat-form-field  
+        hintLabel="Max 500 characters"
+        appearance="outline"
+        color="accent"
+        class="mat-mdc-form-field"
+        > 
+        <input
+          matInput
+          placeholder="{{ task_name }}"
+          formControlName="task_name"
+          name="task_name" />
+        </mat-form-field>
+        <button
+        mat-stroked-button
+        class="save-button"
+        type="submit"
+        [disabled]="task_editor_form.invalid">
+        Save
+      </button>
+        <button
+        mat-stroked-button
+        class="save-button">
+        Delete
+        </button>
+    </mat-card>
+</form>
