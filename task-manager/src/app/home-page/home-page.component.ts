@@ -10,5 +10,5 @@ import { TaskCardWidget } from '../task-card/task-card.widget';
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent {
-  public static Route: Route = {path: 'mytasks', component: HomePageComponent};
+  public static Route: Route = {path: '', component: HomePageComponent};
 }
