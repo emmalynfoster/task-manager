@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { Route } from '@angular/router';
 import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatCard } from '@angular/material/card';
-import { MatInput } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { SharedModule } from '../shared.module';
 
 @Component({
   selector: 'app-edit-task',
   standalone: true,
-  imports: [ReactiveFormsModule,  MatFormField, MatCard, MatInput, MatLabel, MatButton],
+  imports: [
+    SharedModule],
   templateUrl: './edit-task.component.html',
-  styleUrl: './edit-task.component.css'
+  styleUrl: './edit-task.component.css',
 })
 export class EditTaskComponent {
 
@@ -25,6 +24,8 @@ export class EditTaskComponent {
   due_date = new FormControl('', [Validators.required]);
   description = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
+  //change to set to task property categories
+  categories = ["HOME", "WORK","SCHOOL"];
 
   public task_editor_form = this.formBuilder.group({
     task_name: this.task_name,
@@ -36,8 +37,12 @@ export class EditTaskComponent {
   constructor(
     protected formBuilder: FormBuilder
   ){
-  //  this.task_editor_form.setValue({
-   // });
+    this.task_editor_form.setValue({
+      task_name: "Task 1",
+      due_date: "4/30/24",
+      description: "Task",
+      category: "School"
+   });
   }
 
   onSubmit(){}

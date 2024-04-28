@@ -3,31 +3,50 @@
 </div>
 
 <form [formGroup]="task_editor_form">
-    <mat-card class="mat-mdc-card">
-        <mat-label class="mat-label">Task Name*</mat-label>
+    <mat-card style="background-color: beige;">
         <mat-form-field  
-        hintLabel="Max 500 characters"
         appearance="outline"
         color="accent"
-        class="mat-mdc-form-field"
         > 
+        <mat-label class="mat-label">Task Name</mat-label>
         <input
           matInput
-          placeholder="{{ task_name }}"
           formControlName="task_name"
           name="task_name" />
         </mat-form-field>
-        <button
-        mat-stroked-button
-        class="save-button"
-        type="submit"
-        [disabled]="task_editor_form.invalid">
-        Save
-      </button>
-        <button
-        mat-stroked-button
-        class="save-button">
-        Delete
-        </button>
+        <mat-form-field  
+        appearance="outline"
+        color="accent"
+        > 
+          <input
+            matInput
+            formControlName="due_date"
+            name="due_date" />
+          <mat-label class="mat-label">Due Date</mat-label>
+        </mat-form-field>
+        <mat-form-field  
+        appearance="outline"
+        color="accent"
+        >
+        <mat-label class="mat-label">Description</mat-label> 
+        <input
+          matInput
+          formControlName="description"
+          name="description" />
+        </mat-form-field>
+    <mat-form-field  
+    appearance="outline"
+    color="accent"
+    >
+    <mat-label class="mat-label">Category</mat-label>
+      <mat-select
+          matListItemTitle
+          formControlName="category"
+          name="category"
+      >
+          <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+
+      </mat-select>
+    </mat-form-field>
     </mat-card>
 </form>

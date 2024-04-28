@@ -24,6 +24,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     RouterOutlet,
@@ -52,10 +56,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatToolbarModule,
     MatTooltipModule,
     MatCheckboxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    CommonModule
   ],
-  exports: [],
-  providers: [],
+  exports: [AppComponent],
+  providers: [provideAnimations()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
