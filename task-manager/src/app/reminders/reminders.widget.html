@@ -1,0 +1,6 @@
+<mat-card>
+    <mat-label>Reminders</mat-label>
+    <ul class="list">
+        <li onClick="toggleCompletion(this)" *ngFor="let reminder of reminders">{{ reminder }}</li>
+    </ul>
+</mat-card>

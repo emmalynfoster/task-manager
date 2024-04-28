@@ -13,7 +13,7 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    color: black;
+    color: #9E8EDE;
     text-align: center;
     padding: 20px 0;
 }
@@ -27,7 +27,7 @@ footer {
 .footer-line {
     flex: 1;
     height: 1px;
-    background-color: black;
+    background-color: #9E8EDE;
 }
 
 .footer-text {

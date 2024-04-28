@@ -2,12 +2,15 @@ html{
     font-family: OpenSans, sans-serif;
 }
 
+mat-card{
+  width: 220px;
+  height: 190px;
+  background-color: #9E8EDE;
+  border: solid #9E8EDE 5px;
+  border-radius: 10px;
+}
+
 .widget-container{
-    width: 210px;
-    height:180px;
-    border: solid #9E8EDE 5px;
-    border-radius: 10px;
-    background-color: #9E8EDE;
     display: flex;
     flex-direction: column;
     padding: 0%;

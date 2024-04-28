@@ -1,4 +1,10 @@
 <div class="navbar">
     <span class="page-name">My Tasks</span>
 </div>
-<task-card-widget></task-card-widget>
+
+<div class="widget-container">
+    <div class="task-cards">
+        <task-card-widget *ngFor="let num of list"></task-card-widget>
+    </div>
+    <reminders-widget></reminders-widget>
+</div>

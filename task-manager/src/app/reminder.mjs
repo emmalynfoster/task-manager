@@ -1,6 +1,6 @@
-import {db} from '../database/db.mjs';
+import {db} from '../../../database/db.mjs';
 
-export class Note {
+export class Reminder {
 
     #id
     #note
@@ -16,8 +16,8 @@ export class Note {
 
             try {
                 let db_result = await db.run('Insert into reminders values (NULL, ?)', data.note);
-                let task = new Task(db_result.lastID, data.note);
-                return task;
+                let reminder = new Reminder(db_result.lastID, data.note);
+                return reminder;
             } catch (e) {
                 return null;
             }
@@ -36,21 +36,19 @@ export class Note {
     static async getAllReminders(){
         let reminders = [];
         try {
-            for (id in getAllIDs()){
-                reminders.push(getTask(id));
-            }
-            return reminders;
+            reminders = await db.all("SELECT * FROM reminders")
+            return reminders.map((item) => new Reminder(item.id, item.note));
         }
         catch (e) { return []; }
     }
 
-    static async getTask(id){
+    static async getReminder(id){
         try {
             let row = await db.get('Select * from reminders where id = ?', id);
             if (!row) {
                 return null;
             } else {
-                return new Task(row.id, row.note);
+                return new Reminder(row.id, row.note);
             }
         } 
         
@@ -85,7 +83,7 @@ export class Note {
 
     // Setters
 
-    async setTitle(new_note) {
+    async setNote(new_note) {
         try {
             await db.run('Update reminders set note = ? where id = ?', new_note, this.#id);
             this.#note = new_note;

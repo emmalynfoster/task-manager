@@ -12,3 +12,11 @@
     font-size: 24px;
     margin-left:10px;
 }
+
+.task-cards{
+    display: flex;
+}
+
+.widget-container{
+    display: flex;
+}

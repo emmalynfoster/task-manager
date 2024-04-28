@@ -1,0 +1,19 @@
+mat-card{
+    padding: 5px;
+    background-color: #8EDEBD;
+    font-family: OpenSans, sans-serif;
+    justify-content: left;
+}
+
+.list{
+    color: white;
+    margin-right: 3px;
+}
+
+li {
+    cursor: pointer;
+}
+
+.completed{
+    text-decoration: line-through;
+}
