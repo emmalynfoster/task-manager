@@ -1,15 +1,62 @@
-<div class="header">
-    <h1><b>Welcome to the Task Manager</b></h1>
+<div class="navbar">
+    <span class="page-name">My Tasks</span>
 </div>
+
 <div class="form-container">
-    <form id="login-form" class="form"> 
-        <input type="text" id="username" placeholder="Email or Username" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button (click)="navigateToMyTasks()" type="submit">Login</button>
-    </form> 
-    <form id="signup-form" class="form">
-        <input type="text" id="new-username" placeholder="Email or Username" required>
-        <input type="password" id="new-password" placeholder="Password" required>
-        <button (click)="navigateToMyTasks()" type="submit">Sign Up</button>
+
+    <form [formGroup]="login_form">
+        <mat-card>
+            <mat-form-field
+                appearance="outline"
+                color="accent"
+            >
+            <mat-label>Email or Username</mat-label>
+            <input
+            matInput
+            formControlName="login_username"
+            name="login_username" />
+            </mat-form-field>
+            <mat-form-field
+            appearance="outline"
+            color="accent"
+            >
+            <mat-label>Password</mat-label>
+            <input
+            matInput
+            formControlName="login_password"
+            name="login_password" />
+            </mat-form-field>
+            <button mat-stroked-button (click)="navigateToMyTasks()" type="submit" style="margin-bottom: 10px;">Log in</button>
+            <p>No account? Sign up below</p>
+        </mat-card>
     </form>
+
+ 
+
+    <form [formGroup]="signup_form">
+        <mat-card>
+            <mat-form-field
+                appearance="outline"
+                color="accent"
+            >
+            <mat-label>Email or Username</mat-label>
+            <input
+            matInput
+            formControlName="signup_username"
+            name="signup_username" />
+            </mat-form-field>
+            <mat-form-field
+            appearance="outline"
+            color="accent"
+            >
+            <mat-label>Password</mat-label>
+            <input
+            matInput
+            formControlName="signup_password"
+            name="signup_password" />
+            </mat-form-field>
+            <button mat-stroked-button (click)="navigateToMyTasks()" type="submit">Sign Up</button>
+        </mat-card>
+    </form>
+
 </div>
