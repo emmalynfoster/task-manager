@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RemindersWidget } from './reminders/reminders.widget';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 export const routes: Routes = [
   HomePageComponent.Route,
   EditTaskComponent.Route,
-  RemindersWidget.Route
+  RemindersWidget.Route,
+  LoginPageComponent.Route
 ];
 
 @NgModule({
