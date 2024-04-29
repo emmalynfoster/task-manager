@@ -1,0 +1,41 @@
+.navbar {
+    width: 100%;
+    background-color: #B80454;
+    color: white;
+    padding: 10px 0;
+    text-align: left;
+    font-family: OpenSans, sans-serif;
+    margin-bottom: 30px;
+}
+
+.page-name {
+    font-size: 24px;
+    margin-left:10px;
+}
+
+mat-select{
+    color: white !important;
+}
+
+mat-label{
+    color: white !important;
+    font-family: OpenSans, sans-serif;
+}
+
+mat-card{
+    padding: 15px;
+    background-color: #9E8EDE;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+button{
+    color: white !important;
+    border: solid 1px white !important;
+    margin: 5px;
+
+}

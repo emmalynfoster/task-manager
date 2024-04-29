@@ -1,0 +1,54 @@
+<div class="navbar">
+    <span class="page-name">Task Editor</span>
+</div>
+
+<form [formGroup]="task_editor_form">
+    <mat-card style="background-color: #9E8EDE;">
+        <mat-form-field  
+        appearance="outline"
+        color="accent"
+        > 
+        <mat-label class="mat-label">Task Name</mat-label>
+        <input
+          matInput
+          formControlName="task_name"
+          name="task_name" />
+        </mat-form-field>
+        <mat-form-field  
+        appearance="outline"
+        color="accent"
+        > 
+          <input
+            matInput
+            formControlName="due_date"
+            name="due_date" />
+          <mat-label class="mat-label">Due Date</mat-label>
+        </mat-form-field>
+        <mat-form-field  
+        appearance="outline"
+        color="accent"
+        >
+        <mat-label class="mat-label">Description</mat-label> 
+        <input
+          matInput
+          formControlName="description"
+          name="description" />
+        </mat-form-field>
+    <mat-form-field  
+    appearance="outline"
+    color="accent"
+    >
+    <mat-label class="mat-label">Category</mat-label>
+      <mat-select
+          matListItemTitle
+          formControlName="category"
+          name="category"
+      >
+          <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+
+      </mat-select>
+    </mat-form-field>
+    <div class="button-container"> <button mat-stroked-button>Update</button>
+      <button mat-stroked-button>Delete</button></div>
+    </mat-card>
+</form>
