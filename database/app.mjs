@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { Task } from '../task-manager/src/app/task.mjs'
 import { Reminder } from '../task-manager/src/app/reminder.mjs';
+import { User } from '../task-manager/src/app/user.mjs';
 
 const app = express()
 const port = 3000
@@ -69,6 +70,18 @@ app.delete('/reminders/:id', async (req, res) => {
     let deleted = await Reminder.deleteReminder(req.params.id)
     if(deleted){ res.status(200).send("Reminder deleted"); }
     else{ res.status(400).send("Delete failed"); }
+})
+
+app.get('/users/:id', async (req,res) => {
+    let result = await User.getByID(req.params.id)
+    if(result == null){ res.status(404).send("User not found")}
+    else{ res.json(user.json()) }
+})
+
+app.get('/users', async (req, res) => {
+    let result = await User.getByName(req.query.name)
+    if( result == null ){res.status(404).send("User not found")}
+    else{ res.json(user.json()) }
 })
 
 app.listen(port, () => {

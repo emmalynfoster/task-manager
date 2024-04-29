@@ -11,6 +11,14 @@ export class User{
         this.#dark_mode = dark_mode
     }
 
+    json(){
+        return {
+            id: this.#id,
+            name: this.#name,
+            dark_mode: this.#dark_mode
+        }
+    }
+
     static async create(data){
         if ((data !== undefined) && (data instanceof Object) 
         && (data.name !== undefined) && (typeof data.name == 'string')
@@ -47,6 +55,15 @@ export class User{
             }
             return new User(row.id, row.name, row.dark_mode)
         } catch (e) {
+            return null
+        }
+    }
+
+    static async updatePreference(name, mode){
+        try{
+                db.run('UPDATE users SET dark_mode = ? WHERE name = ?', mode, name)
+                return "success"
+        } catch (e){
             return null
         }
     }
