@@ -28,13 +28,15 @@ import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { RemindersWidget } from './reminders/reminders.widget';
+import { RemindersEditorComponent } from './reminders-editor/reminders-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskCardWidget,
     EditTaskComponent,
-    RemindersWidget
+    RemindersWidget, 
+    RemindersEditorComponent
   ],
   imports: [
     BrowserModule,

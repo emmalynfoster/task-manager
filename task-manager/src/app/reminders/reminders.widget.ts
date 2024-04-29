@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SharedModule } from '../shared.module';
-import { Route } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'reminders-widget',
@@ -10,10 +10,13 @@ import { Route } from '@angular/router';
   styleUrl: './reminders.widget.css'
 })
 export class RemindersWidget {
-  public static Route: Route = {path: '', component: RemindersWidget};
   public reminders: string[];
 
-  constructor(){
+  constructor(private router: Router){
     this.reminders = ["Project due soon", "Do laundry", "Meeting 4/29", "hello my name is"];
+  }
+
+  navigateToEdit(): void {
+    this.router.navigate(['/reminders/editor']);
   }
 }
