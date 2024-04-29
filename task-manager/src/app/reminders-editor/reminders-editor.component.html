@@ -1,12 +1,17 @@
 <div class="navbar">
-    <span class="page-name">Reminders Editor</span>
+    <span class="page-name">New Reminder</span>
 </div>
 
-<mat-card>
-    <mat-form-field>
-    <mat-label>New Reminder</mat-label>
-    <input
-        matInput
-    />
-    </mat-form-field>
-</mat-card>
+<form [formGroup]="new_reminder">
+    <mat-card>
+        <mat-form-field>
+        <mat-label>Reminder</mat-label>
+        <input
+            matInput
+            formControlName="note"
+            name="note"
+        />
+        </mat-form-field>
+        <button mat-stroked-button type="submit"><strong>Add new reminder</strong></button>
+    </mat-card>
+</form>
