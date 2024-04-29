@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedModule } from '../shared.module';
 
 @Component({
   selector: 'task-card-widget',
   standalone: true,
-  imports: [],
+  imports: [SharedModule],
   templateUrl: './task-card.widget.html',
   styleUrl: './task-card.widget.css'
 })
@@ -26,5 +27,8 @@ export class TaskCardWidget {
   getDueDate(){}
 
   getIsComplete(){}
+
+  // update object to complete, if checked vs. not checked
+  onCheck(){}
 
 }

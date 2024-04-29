@@ -1,0 +1,7 @@
+<mat-card>
+    <mat-label>Reminders</mat-label>
+    <ul class="list">
+        <li *ngFor="let reminder of reminders"><input type="checkbox"><del>{{ reminder }}</del></li>
+    </ul>
+    <button mat-stroked-button><strong>Edit Reminders</strong></button>
+</mat-card>

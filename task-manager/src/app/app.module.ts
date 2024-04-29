@@ -27,12 +27,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { RemindersWidget } from './reminders/reminders.widget';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskCardWidget,
-    EditTaskComponent
+    EditTaskComponent,
+    RemindersWidget
   ],
   imports: [
     BrowserModule,
