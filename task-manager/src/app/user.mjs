@@ -11,6 +11,10 @@ export class User{
         this.#dark_mode = dark_mode
     }
 
+    getMode(){
+        return this.#dark_mode
+    }
+
     json(){
         return {
             id: this.#id,

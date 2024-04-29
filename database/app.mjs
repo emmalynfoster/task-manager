@@ -78,10 +78,10 @@ app.get('/users/:id', async (req,res) => {
     else{ res.json(user.json()) }
 })
 
-app.get('/users', async (req, res) => {
+app.get('/preference', async (req, res) => {
     let result = await User.getByName(req.query.name)
     if( result == null ){res.status(404).send("User not found")}
-    else{ res.json(user.json()) }
+    else{ res.send(result.getMode()) }
 })
 
 app.listen(port, () => {
