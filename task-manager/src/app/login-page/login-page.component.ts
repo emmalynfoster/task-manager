@@ -9,7 +9,7 @@ import { Route, Router } from '@angular/router';
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent {
-  public static Route: Route = {path: '', component: LoginPageComponent};
+  public static Route: Route = {path: 'login', component: LoginPageComponent};
 
   constructor(private router: Router) { }
 
