@@ -12,7 +12,7 @@ import { RemindersWidget } from '../reminders/reminders.widget';
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent {
-  public static Route: Route = {path: '', component: HomePageComponent};
+  public static Route: Route = {path: 'tasks', component: HomePageComponent};
   public category1: number[];
   public category2: number[];
   public category3: number[];

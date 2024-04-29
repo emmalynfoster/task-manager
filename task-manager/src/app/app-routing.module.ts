@@ -8,6 +8,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 export const routes: Routes = [
   HomePageComponent.Route,
   EditTaskComponent.Route,
+  RemindersEditorComponent.Route,
+  LoginPageComponent.Route,
 ];
 
 @NgModule({
