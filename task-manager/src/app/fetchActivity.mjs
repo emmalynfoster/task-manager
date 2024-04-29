@@ -5,6 +5,7 @@ async function getRecreationalActivity() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data.activity);
         return data.activity;
     }
     catch (error) {
@@ -20,6 +21,7 @@ async function getActivity() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data.activity);
         return data.activity;
     }
     catch (error) {

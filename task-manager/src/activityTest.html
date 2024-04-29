@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API Test</title>
+        <script type="text/javascript" src="app/fetchActivity.mjs"></script>
+    </head>
+    <body>
+        <button onclick="handleClick()">Test</button>
+        <p id="activity"></p>
+        <script>
+            async function handleClick(){
+                getActivity().then(data => {
+                    let textElement = document.getElementById("activity");
+                    textElement.textContent = data + ".";
+                }).catch(error => {
+                    console.error("Error fetching text data:", error);
+                });
+            }
+        </script>
+    </body>  
+    </html>
