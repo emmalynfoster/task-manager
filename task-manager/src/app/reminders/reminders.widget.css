@@ -1,0 +1,49 @@
+mat-card{
+    padding: 10px;
+    background-color: #8EDEBD;
+    font-family: OpenSans, sans-serif;
+    justify-content: left;
+    width: 225px;
+    position: absolute;
+}
+
+.list{
+    color: white;
+    background-color: #9E8EDE;
+    border-radius: 8px;
+    list-style-type: none;
+    margin-bottom: 8px;
+    margin-top: 5px;
+    justify-content: left;
+}
+
+li {
+    cursor: pointer;
+}
+
+.completed{
+    text-decoration: line-through;
+}
+
+mat-label{
+    color: #B80454;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+button{
+    color: white !important;
+    font-family: OpenSans, sans-serif;
+    border: none;
+    background-color: #B80454;
+    margin-bottom: 8px;
+}
+
+mat-checkbox{
+    border: white !important;
+
+}
+
+p{
+    color: white !important;
+}

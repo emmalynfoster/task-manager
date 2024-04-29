@@ -1,0 +1,43 @@
+.navbar {
+    width: 100%;
+    background-color: #B80454;
+    color: white;
+    padding: 10px 0;
+    text-align: left;
+    font-family: OpenSans, sans-serif;
+    margin-bottom: 30px;
+}
+
+.page-name {
+    font-size: 24px;
+    margin-left:10px;
+}
+
+input{
+    color: white !important;
+}
+
+mat-select{
+    color: white !important;
+}
+
+mat-label{
+    color: white !important;
+}
+
+mat-card{
+    padding: 15px;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+button{
+    color: white !important;
+    border: solid 1px white !important;
+    margin: 5px;
+
+}
