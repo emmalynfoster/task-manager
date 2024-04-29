@@ -1,0 +1,15 @@
+<div class="header">
+    <h1><b>Welcome to the Task Manager</b></h1>
+</div>
+<div class="form-container">
+    <form id="login-form" class="form"> 
+        <input type="text" id="username" placeholder="Email or Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button (click)="navigateToMyTasks()" type="submit">Login</button>
+    </form> 
+    <form id="signup-form" class="form">
+        <input type="text" id="new-username" placeholder="Email or Username" required>
+        <input type="password" id="new-password" placeholder="Password" required>
+        <button (click)="navigateToMyTasks()" type="submit">Sign Up</button>
+    </form>
+</div>

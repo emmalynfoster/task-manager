@@ -9,4 +9,6 @@ await db.run(`CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, descriptio
 
 await db.run('CREATE TABLE reminders (id INTEGER PRIMARY KEY, note TEXT)');
 
+await db.run(`CREATE TABLE users (email TEXT NOT NULL, password TEXT NOT NULL, session_token TEXT)`);
+
 db.close();
