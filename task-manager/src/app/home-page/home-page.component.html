@@ -3,8 +3,24 @@
 </div>
 
 <div class="widget-container">
-    <div class="task-cards">
-        <task-card-widget *ngFor="let num of list"></task-card-widget>
+    <div>
+        <mat-label>Work</mat-label>
+        <div class="task-cards">
+            <task-card-widget *ngFor="let num of category1"></task-card-widget>
+        </div>
     </div>
-    <reminders-widget></reminders-widget>
+    <div>
+        <mat-label>School</mat-label>
+        <div class="task-cards">
+            <task-card-widget *ngFor="let num of category2"></task-card-widget>
+        </div>
+    </div>
+    <div>
+        <mat-label>Home</mat-label>
+        <div class="task-cards">
+            <task-card-widget *ngFor="let num of category3"></task-card-widget>
+        </div>
+    </div>
+  
+    <reminders-widget class="reminders-widget"></reminders-widget>
 </div>

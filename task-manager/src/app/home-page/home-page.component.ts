@@ -13,10 +13,15 @@ import { RemindersWidget } from '../reminders/reminders.widget';
 })
 export class HomePageComponent {
   public static Route: Route = {path: '', component: HomePageComponent};
-  public list: number[];
+  public category1: number[];
+  public category2: number[];
+  public category3: number[];
+
 
   constructor(){
-    this.list = [1,2,3,4]
+    this.category1 = [1,2,3,4,5,6];
+    this.category2 = [1,2,3];
+    this.category3 = [1,2,3];
   }
 
 }

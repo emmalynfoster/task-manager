@@ -28,4 +28,7 @@ export class TaskCardWidget {
 
   getIsComplete(){}
 
+  // update object to complete, if checked vs. not checked
+  onCheck(){}
+
 }

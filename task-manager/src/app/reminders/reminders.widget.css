@@ -1,13 +1,18 @@
 mat-card{
-    padding: 5px;
+    padding: 10px;
     background-color: #8EDEBD;
     font-family: OpenSans, sans-serif;
     justify-content: left;
+    width: 225px;
+    position: absolute;
 }
 
 .list{
     color: white;
-    margin-right: 3px;
+    background-color: #9E8EDE;
+    border-radius: 8px;
+    padding: 20px;
+    list-style-type: none;
 }
 
 li {
@@ -16,4 +21,24 @@ li {
 
 .completed{
     text-decoration: line-through;
+}
+
+mat-label{
+    color: white;
+    font-size: 20px;
+}
+
+button{
+    color: white !important;
+    font-family: OpenSans, sans-serif;
+    border: none;
+    background-color: #DCBCD0;
+}
+
+ul li del {
+    text-decoration: none;
+    }
+ul li input[type=checkbox]:checked ~ del {
+    text-decoration: line-through;
+
 }
