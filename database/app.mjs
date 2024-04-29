@@ -8,6 +8,13 @@ const port = 3000
 
 app.use(bodyParser.json())
 
+//Adding cores headers
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control_Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
+
 // TASK API
 
 // Retrieve array of all tasks

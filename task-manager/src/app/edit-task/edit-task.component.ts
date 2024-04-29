@@ -3,6 +3,7 @@ import { Route } from '@angular/router';
 import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../shared.module';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-edit-task',
@@ -35,7 +36,8 @@ export class EditTaskComponent {
   });
 
   constructor(
-    protected formBuilder: FormBuilder
+    protected formBuilder: FormBuilder,
+    private taskService: TaskService
   ){
     this.task_editor_form.setValue({
       task_name: "Task 1",
@@ -43,6 +45,11 @@ export class EditTaskComponent {
       description: "Task",
       category: "School"
    });
+  }
+
+  //function should be added as an event handler to the button that will 
+  updateTask() {
+    //Needs implementation ** Similar to createNewTask() in home-page.components.ts
   }
 
   onSubmit(){}
