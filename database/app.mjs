@@ -80,7 +80,7 @@ app.get('/users/:id', async (req,res) => {
 
 app.get('/preference', async (req, res) => {
     let result = await User.getByName(req.query.name)
-    if( result == null ){res.status(404).send("User not found")}
+    if( result == null ){ res.send(0)}
     else{ res.send(result.getMode()) }
 })
 
