@@ -18,7 +18,7 @@ mat-select{
 }
 
 mat-label{
-    color: white !important;
+    color: #B80454 !important;
     font-family: OpenSans, sans-serif;
 }
 
@@ -35,7 +35,14 @@ mat-card{
 
 button{
     color: white !important;
-    border: solid 1px white !important;
+    border: none;
     margin: 5px;
+    width: 200px;
+    background-color: #8EDEBD;
 
+
+}
+
+input{
+    color:#9E8EDE !important;
 }
