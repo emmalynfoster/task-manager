@@ -32,7 +32,7 @@ export class TaskService {
     return this.webRequestService.put('tasks/' + id, {title, description, due_date, completed, category});
   }
 
-  deleteTask(id : number) {
+  deleteTask(id: number) {
     return this.webRequestService.delete('tasks/' + id);
   }
 }
