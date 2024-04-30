@@ -25,13 +25,4 @@ export class HomePageComponent {
     this.category3 = [1,2,3];
   }
 
-  //This method will be used as an evet handler for a New task button 
-  createNewTask() {
-    this.taskService.createTask("Comp 426", "finish final project", "2024-04-30", 0, "SCHOOL").subscribe((response: any) => {
-      //Make sure the response is correct on console, then check and make sure it is working in postman
-      //* Curently this is not working
-      console.log(response);
-    });
-  }
-
 }
