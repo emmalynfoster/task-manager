@@ -24,12 +24,6 @@ export class RemindersWidget {
   }
 
   constructor(private router: Router, private reminderService: ReminderService){
-    // this.reminders = [
-    //   { text: "Project due soon", checked: false },
-    //   { text: "Do laundry", checked: false },
-    //   { text: "Meeting 4/29", checked: false },
-    //   { text: "hello my name is", checked: false }
-    // ];
   }
 
   navigateToEdit(): void {
