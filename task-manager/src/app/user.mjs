@@ -27,10 +27,9 @@ export class User{
         if ((data !== undefined) && (data instanceof Object) 
         && (data.name !== undefined) && (typeof data.name == 'string')
         && (data.dark_mode !== undefined) && (data.dark_mode in [0,1])) {
-
             try {
                 let db_result = await db.run('Insert into users values (NULL, ?, ?)', data.name, data.dark_mode);
-                let user = new User(db_result.lastID, data.nanme, data.dark_mode);
+                let user = new User(db_result.lastID, data.name, data.dark_mode);
                 return user;
             } catch (e) {
                 return null;
@@ -53,7 +52,7 @@ export class User{
 
     static async getByName(name){
         try{
-            let row = await db.get('SELECT * FROM users WHERE name = ?', id)
+            let row = await db.get('SELECT * FROM users WHERE name = ?', name)
             if (! row){
                 return null;
             }
@@ -65,8 +64,9 @@ export class User{
 
     static async updatePreference(name, mode){
         try{
-                db.run('UPDATE users SET dark_mode = ? WHERE name = ?', mode, name)
-                return "success"
+                await db.run('UPDATE users SET dark_mode = ? WHERE name = ?', mode, name)
+                let user = await User.getByName(name)
+                return user
         } catch (e){
             return null
         }

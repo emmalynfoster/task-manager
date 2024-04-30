@@ -72,16 +72,53 @@ app.delete('/reminders/:id', async (req, res) => {
     else{ res.status(400).send("Delete failed"); }
 })
 
-app.get('/users/:id', async (req,res) => {
-    let result = await User.getByID(req.params.id)
+
+// USERS API
+
+//get user by name, return user json
+app.get('/users/:name', async (req,res) => {
+    let result = await User.getByName(req.params.name)
     if(result == null){ res.status(404).send("User not found")}
-    else{ res.json(user.json()) }
+    else{ res.json(result.json()) }
 })
 
-app.get('/preference', async (req, res) => {
-    let result = await User.getByName(req.query.name)
+
+// get user preference by name
+// return 0 if user doesn't exist
+// otherwise returns either 0 or 1 (how preference is stored)
+app.get('/preference/:name', async (req, res) => {
+    let result = await User.getByName(req.params.name)
     if( result == null ){ res.send(0)}
     else{ res.send(result.getMode()) }
+})
+
+// make a new user, sends error if a user by that name already exists
+// expects form {name: {whatever the name is}, dark_mode: 0 or 1}
+app.post('/users', async (req, res) => {
+    if (await User.getByName(req.body.name)){
+        res.status(400).send("Bad request, user already exists")
+        return
+    }
+    let user = await User.create(req.body)
+    if (! user){res.status(400).send("bad request")}
+    else {res.status(201).json(user.json())}
+})
+
+// put user preference by name
+//expects user preference in body either 0 or 1 as dark_mode
+app.put('/users/:name', async (req, res) => {
+    let user = await User.getByName(req.params.name)
+    if (! user){
+        res.status(404).send("user not found");
+        return
+    }
+    
+    user = await User.updatePreference(req.params.name, req.body.dark_mode)
+    if(!user){
+        res.status(400).send("Bad Request");
+        return;
+    }
+    res.status(200).json(user.json())
 })
 
 app.listen(port, () => {
