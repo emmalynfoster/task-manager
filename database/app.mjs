@@ -24,6 +24,26 @@ app.get('/tasks', async (req, res) => {
     res.json(result.map((task)=> task.json()));
 })
 
+app.get('/tasks/school', async (req, res) => {
+    let result = await Task.getAllSchool();
+    res.json(result.map((task)=> task.json()));
+})
+
+app.get('/tasks/home', async (req, res) => {
+    let result = await Task.getAllHome();
+    res.json(result.map((task)=> task.json()));
+})
+
+app.get('/tasks/all', async (req, res) => {
+    let result = await Task.getAllIDs();
+    res.json(result);
+})
+
+app.get('/tasks/work', async (req, res) => {
+    let result = await Task.getAllWork();
+    res.json(result.map((task)=> task.json()));
+})
+
 app.get('/tasks/:id', async (req, res) => {
     let result = await Task.getTask(req.params.id);
     if (result == null){ res.status(404).send("Task not found"); }
