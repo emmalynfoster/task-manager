@@ -19,14 +19,19 @@ export class HomePageComponent {
   workTasks!: any[];
   homeTasks!: any[];
   schoolTasks!: any[];
+  reminders!: any[];
 
   ngOnInit(){
     this.taskService.getAllWork().subscribe({
       next: (tasks) => (this.workTasks = tasks)
     });
+
+    this.reminderSerivce.getReminders().subscribe({
+      next: (reminders) => (this.reminders = reminders)
+    });
   }
 
-  constructor(private router: Router, private taskService: TaskService){
+  constructor(private router: Router, private taskService: TaskService, private reminderSerivce: ReminderService){
    
   }
 

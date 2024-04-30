@@ -4,19 +4,22 @@ export class Reminder {
 
     #id
     #note
+    #checked
 
-    constructor (id, note) {
+    constructor (id, note, checked) {
         this.#id = id;
         this.#note = note;
+        this.#checked = checked;
     }
 
     static async create(data){
         if ((data !== undefined) && (data instanceof Object) 
-        && (data.note !== undefined) && (typeof data.note == 'string')) {
+        && (data.note !== undefined) && (typeof data.note == 'string')
+        && (data.checked !== undefined) && (data.checked in [0, 1])) {
 
             try {
-                let db_result = await db.run('Insert into reminders values (NULL, ?)', data.note);
-                let reminder = new Reminder(db_result.lastID, data.note);
+                let db_result = await db.run('Insert into reminders values (NULL, ?, ?)', data.note, data.checked);
+                let reminder = new Reminder(db_result.lastID, data.note, data.checked);
                 return reminder;
             } catch (e) {
                 return null;
@@ -37,7 +40,7 @@ export class Reminder {
         let reminders = [];
         try {
             reminders = await db.all("SELECT * FROM reminders")
-            return reminders.map((item) => new Reminder(item.id, item.note));
+            return reminders.map((item) => new Reminder(item.id, item.note, item.checked));
         }
         catch (e) { return []; }
     }
@@ -48,16 +51,28 @@ export class Reminder {
             if (!row) {
                 return null;
             } else {
-                return new Reminder(row.id, row.note);
+                return new Reminder(row.id, row.note, row.checked);
             }
         } 
         
         catch (e) { return null; }
     }
 
-    static async deleteReminder(id){
+    static async getCheckedReminders() {
         try {
-            await db.run('Delete from reminders where id = ?', id);
+            let row = await db.all('SELECT * from reminders where checked = 1');
+            if(!row) {
+                return null;
+            } else {
+                return row.map((reminder) => new Reminder(reminder.id, reminder.note, reminder.checked));
+            }
+        }
+        catch (e) { return null; }
+    }
+
+    static async deleteCheckedReminders(){
+        try {
+            await db.run('Delete from reminders where checked = 1');
             return true;
         } catch (e) {
             return false;
@@ -77,16 +92,17 @@ export class Reminder {
     json() {
         return {
             id: this.#id,
-            note: this.#note
+            note: this.#note,
+            checked: this.#checked
         }
     }
 
     // Setters
 
-    async setNote(new_note) {
+    async setChecked(checked) {
         try {
-            await db.run('Update reminders set note = ? where id = ?', new_note, this.#id);
-            this.#note = new_note;
+            await db.run('UPDATE reminders set checked = ? where id = ?', checked, this.#id);
+            this.#checked = checked;
             return true;
         } catch (e) {
             return false;

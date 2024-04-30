@@ -7,6 +7,6 @@ await db.run(`CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, descriptio
                 complete BOOLEAN NOT NULL CHECK (complete IN (0, 1)),
                 category TEXT NOT NULL CHECK (category IN ('HOME', 'WORK', 'SCHOOL')))`);
 
-await db.run('CREATE TABLE reminders (id INTEGER PRIMARY KEY, note TEXT)');
+await db.run('CREATE TABLE reminders (id INTEGER PRIMARY KEY, note TEXT, checked BOOLEAN NOT NULL CHECK (checked IN (0,1) ))');
 
 db.close();

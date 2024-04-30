@@ -21,12 +21,12 @@ export class ReminderService {
     return this.webRequestService.post('reminders', {note});
   }
 
-  updateNote(id: number, note: string) {
-    return this.webRequestService.put('reminders/' + id, {note});
+  updateChecked(id: number, checked: number) {
+    return this.webRequestService.put('reminders/' + id, {checked});
   }
 
-  deleteNote(id: number){
-    return this.webRequestService.delete('reminders/' + id);
+  deleteCheckedReminders(){
+    return this.webRequestService.delete('reminders');
   }
 
 

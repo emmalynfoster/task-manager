@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     next();
 })
 
@@ -80,10 +81,10 @@ app.get('/reminders', async (req, res) => {
     res.json(result.map((reminder)=> reminder.json()));
 })
 
-app.get('/reminders/:id', async (req, res) => {
-    let result = await Reminder.getReminder(req.params.id);
-    if (result == null){ res.status(404).send("Task not found"); }
-    else { res.json(result.json()); }
+app.get('/reminders/checked', async (req, res) => {
+    let result = await Reminder.getCheckedReminders();
+    if (result == null){ res.status(404).send("No checked Reminders"); }
+    else { res.json(result.map((reminder) => reminder.json())); }
 })
 
 app.post('/reminders', async (req, res) => {
@@ -92,20 +93,20 @@ app.post('/reminders', async (req, res) => {
     else { res.status(201).json(reminder.json()); }
 })
 
-app.put('/reminders', async (req, res) => {
-    let reminder = await Reminder.create(req.params.id);
+app.put('/reminders/:id', async (req, res) => {
+    let reminder = await Reminder.getReminder(req.params.id);
     if (reminder !== null) {
         if (req.body !== undefined){
-            let new_reminder = await reminder.setNote(req.body.note);
-            res.status(200).json(new_reminder.json());
+            let new_reminder = await reminder.setChecked(req.body.checked);
+            res.status(200).json(new_reminder);
     }
     else { res.status(400).send("Bad request"); }
 }
 })
 
-app.delete('/reminders/:id', async (req, res) => {
-    let deleted = await Reminder.deleteReminder(req.params.id)
-    if(deleted){ res.status(200).send("Reminder deleted"); }
+app.delete('/reminders', async (req, res) => {
+    let deleted = await Reminder.deleteCheckedReminders();
+    if(deleted){ res.status(200).json("Reminders deleted"); }
     else{ res.status(400).send("Delete failed"); }
 })
 

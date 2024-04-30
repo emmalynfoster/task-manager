@@ -1,11 +1,11 @@
 <mat-card>
     <mat-label><strong>Reminders</strong></mat-label>
     <div class="list">
-        <mat-checkbox *ngFor="let reminder of reminders">
+        <mat-checkbox *ngFor="let reminder of reminders" [(ngModel)]="reminder.checked">
             <p> {{ reminder.note }}</p>
         </mat-checkbox>
     </div>
        
     <button mat-stroked-button (click)="navigateToEdit()"><strong>Add Reminders</strong></button>
-    <button mat-stroked-button><strong>Delete Completed</strong></button>
+    <button mat-stroked-button (click)="deleteCompleted()"><strong>Delete Completed</strong></button>
 </mat-card>

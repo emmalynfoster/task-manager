@@ -12,16 +12,8 @@ import { ReminderService } from '../services/reminder.service';
   styleUrl: './reminders.widget.css'
 })
 export class RemindersWidget {
-  @Input() reminder!: any;
+  @Input() reminders!: any[];
 
-  //public reminders: {text: string, checked: boolean}[];
-  reminders!: any[];
-
-  ngOnInit() {
-    this.reminderService.getReminders().subscribe({
-      next: (reminders) => (this.reminders = reminders)
-    });
-  }
 
   constructor(private router: Router, private reminderService: ReminderService){
   }
@@ -33,7 +25,9 @@ export class RemindersWidget {
   addReminder(){}
 
   //tell parent to delete reminders
-  // deleteCompleted(){
-  //   this.reminders = this.reminders.filter(reminder => !reminder.checked);
-  // }
+  deleteCompleted(){
+    this.reminderService.deleteCheckedReminders().subscribe({
+      next: () =>  (this.reminderService.getReminders().subscribe())
+    });
+  }
 }
