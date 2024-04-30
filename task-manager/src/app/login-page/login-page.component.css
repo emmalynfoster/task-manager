@@ -17,9 +17,8 @@
     display: flex;
     width: 100%;
     height: 100%;
-    flex-direction: column;
     margin-top: 20px;
-    justify-content: flex-start;
+    justify-content: center;
   
 }
 
@@ -44,7 +43,8 @@ button:hover {
 
 
 mat-label{
-    color:white !important;
+    color:#B80454 !important;
+    font-family: OpenSans, sans-serif !important;
 }
 
 mat-card{
@@ -55,5 +55,10 @@ p{
     font-family: OpenSans, sans-serif;
     color: #9E8EDE;
 }
+
+.dark-mode{
+    background-color: black !important;
+}
+
 
 
