@@ -9,12 +9,12 @@ export class TaskService {
   constructor(private webRequestService: WebRequestService) { }
 
   //Get all tasks in database
-  getTasks() {
+  getAllTasks() {
     return this.webRequestService.get('tasks');
   }
 
-  //Get all tasks in database
-  getTask(id: number) {
+  //Get a task by id
+  getTaskById(id: number) {
     return this.webRequestService.get('tasks/' + id);
   }
 
@@ -28,11 +28,11 @@ export class TaskService {
 
   //use webRequestService.put method to update task **Not complete
   //Also not sure how to implement beacsue we need the task id 
-  updateTask(title ?: string, description ?: string, due_date ?: string, completed ?: number, category ?: string) {
-    return this.webRequestService.put('tasks', {title, description, due_date, completed, category});
+  updateTask(id: number, title ?: string, description ?: string, due_date ?: string, completed ?: number, category ?: string) {
+    return this.webRequestService.put('tasks/' + id, {title, description, due_date, completed, category});
   }
 
-  deleteTask(id ?: number) {
+  deleteTask(id : number) {
     return this.webRequestService.delete('tasks/' + id);
   }
 }
