@@ -88,8 +88,8 @@ app.get('/users/:name', async (req,res) => {
 // otherwise returns either 0 or 1 (how preference is stored)
 app.get('/preference/:name', async (req, res) => {
     let result = await User.getByName(req.params.name)
-    if( result == null ){ res.send(0)}
-    else{ res.send(result.getMode()) }
+    if( result == null ){ res.status(200).json({dark_mode: 0})}
+    else{ res.status(200).json({dark_mode: result.getMode()}) }
 })
 
 // make a new user, sends error if a user by that name already exists
