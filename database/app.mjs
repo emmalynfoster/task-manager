@@ -72,6 +72,17 @@ app.post('/reminders', async (req, res) => {
     else { res.status(201).json(reminder.json()); }
 })
 
+app.put('/reminders', async (req, res) => {
+    let reminder = await Reminder.create(req.params.id);
+    if (reminder !== null) {
+        if (req.body !== undefined){
+            let new_reminder = await reminder.setNote(req.body.note);
+            res.status(200).json(new_reminder.json());
+    }
+    else { res.status(400).send("Bad request"); }
+}
+})
+
 app.delete('/reminders/:id', async (req, res) => {
     let deleted = await Reminder.deleteReminder(req.params.id)
     if(deleted){ res.status(200).send("Reminder deleted"); }
