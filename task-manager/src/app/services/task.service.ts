@@ -28,7 +28,7 @@ export class TaskService {
 
   //use webRequestService.put method to update task **Not complete
   //Also not sure how to implement beacsue we need the task id 
-  updateTask(id: number, title ?: string, description ?: string, due_date ?: string, completed ?: number, category ?: string) {
+  updateTask(id: number, title : string, description : string, due_date : string, completed : number, category : string) {
     return this.webRequestService.put('tasks/' + id, {title, description, due_date, completed, category});
   }
 
