@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatOption } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -24,6 +25,7 @@ import { MatOption } from '@angular/material/select';
     MatFormFieldModule,
     MatCardModule,
     MatOption,
+    MatSlideToggleModule,
     // Add other Angular Material modules as needed
   ],
   exports: [
@@ -37,6 +39,7 @@ import { MatOption } from '@angular/material/select';
     MatFormFieldModule,
     MatCardModule,
     MatOption,
+    MatSlideToggleModule,
     // Export other modules as needed
   ]
 })

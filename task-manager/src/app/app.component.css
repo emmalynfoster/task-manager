@@ -35,3 +35,7 @@ footer {
     font-size: 10px;
     font-family: OpenSans, sans-serif;
 }
+
+.dark-mode{
+    background-color: black !important;
+}
