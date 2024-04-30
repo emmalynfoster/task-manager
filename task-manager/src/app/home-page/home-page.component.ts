@@ -18,6 +18,7 @@ export class HomePageComponent {
   workTasks!: any[];
   homeTasks!: any[];
   schoolTasks!: any[];
+  suggestion!: any;
 
   ngOnInit(){
     this.taskService.getAllWork().subscribe({
@@ -69,4 +70,4 @@ export class HomePageComponent {
 }
 
 }
-}
+

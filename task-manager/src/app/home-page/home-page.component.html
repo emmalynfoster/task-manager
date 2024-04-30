@@ -3,6 +3,12 @@
 </div>
 
 <div class="widget-container">
+    <div class = "activity-suggestion">
+        <mat-card class="suggestion-card">
+            <button mat-stroked-button (click)="handleClick()"><strong>Get an activity suggestion!</strong></button>
+            <p id="suggestion">{{this.suggestion}}</p>
+        </mat-card>
+    </div>
     <div class="category-container">
         <mat-label *ngIf="workTasks && workTasks.length > 0">Work</mat-label>
         <div class="task-cards">
@@ -32,8 +38,4 @@
         <reminders-widget class="reminders-widget"></reminders-widget>
     </div>
 
-    <div class = "activity-suggestion">
-        <button mat-stroked-button (click)="handleClick()"><strong>Get an activity suggestion</strong></button>
-        <p id="suggestion">{{this.suggestion}}</p>
-    </div>
 </div>
