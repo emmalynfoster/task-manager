@@ -22,7 +22,16 @@ export class HomePageComponent {
   ngOnInit(){
     this.taskService.getAllWork().subscribe({
       next: (tasks) => (this.workTasks = tasks)
-    })
+    });
+
+    this.taskService.getAllHome().subscribe({
+      next: (tasks) => (this.homeTasks = tasks)
+    }); 
+    
+    this.taskService.getAllSchool().subscribe({
+      next: (tasks) => (this.schoolTasks = tasks)
+    });  
+    
   }
 
   constructor(private router: Router, private taskService: TaskService){

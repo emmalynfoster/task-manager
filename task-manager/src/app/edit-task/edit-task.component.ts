@@ -9,8 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-edit-task',
   standalone: true,
-  imports: [
-    SharedModule],
+  imports: [SharedModule],
   templateUrl: './edit-task.component.html',
   styleUrl: './edit-task.component.css',
 })
@@ -26,7 +25,6 @@ export class EditTaskComponent {
   due_date = new FormControl('', [Validators.required]);
   description = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
-  //change to set to task property categories
   protected categories = ["HOME", "WORK","SCHOOL"];
 
   id: number = -1;
@@ -49,7 +47,7 @@ export class EditTaskComponent {
     this.isNew = route.snapshot.params['id'] == 'new';
 
     if(!this.isNew){
-      this.id = route.snapshot.params[':id'];
+      this.id = route.snapshot.params['id'];
       this.taskService.getTaskById(this.id).subscribe({
         next: (taskData) => {
           this.task_editor_form.setValue({
@@ -95,6 +93,17 @@ export class EditTaskComponent {
       }
     } else {
       this.snackBar.open("Please enter the values in the form correctly", '', { duration: 2000 })
+    }
+  }
+
+  deleteTask(){
+    if(!this.isNew){
+      this.taskService.deleteTask(this.id).subscribe({
+        next: () =>  (this.taskService.getAllTasks().subscribe(() => {this.router.navigate(['tasks'])}))
+      });
+    }
+    else{
+      this.snackBar.open("Cannot delete a task that has not been created", '', { duration: 2000 })
     }
   }
 

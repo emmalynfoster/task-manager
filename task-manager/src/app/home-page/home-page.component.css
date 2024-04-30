@@ -45,3 +45,8 @@ button{
     color: white !important;
     border: none;
 }
+
+.category-container {
+    width: 100%; /* Each category takes the full width */
+    margin-bottom: 20px; /* Adds space between categories */
+}
