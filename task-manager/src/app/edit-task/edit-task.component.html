@@ -2,7 +2,7 @@
     <span class="page-name">Task Editor</span>
 </div>
 
-<form [formGroup]="task_editor_form">
+<form [formGroup]="task_editor_form" (ngSubmit)="onSubmit()">
     <mat-card style="background-color: #9E8EDE;">
         <mat-form-field  
         appearance="outline"
@@ -48,7 +48,7 @@
 
       </mat-select>
     </mat-form-field>
-    <div class="button-container"> <button mat-stroked-button (click)="createNewTask()">Update</button>
+    <div class="button-container"> <button mat-stroked-button type="submit">Save</button>
       <button mat-stroked-button>Delete</button></div>
     </mat-card>
 </form>
