@@ -14,19 +14,32 @@ import { TaskService } from '../services/task.service';
 })
 export class HomePageComponent {
   public static Route: Route = {path: 'tasks', component: HomePageComponent};
-  public category1: number[];
-  public category2: number[];
-  public category3: number[];
+  
+  workTasks!: any[];
+  homeTasks!: any[];
+  schoolTasks!: any[];
 
+  ngOnInit(){
+    this.taskService.getAllWork().subscribe({
+      next: (tasks) => (this.workTasks = tasks)
+    });
 
-  constructor(private router: Router){
-    this.category1 = [1,2,3,4,5,6];
-    this.category2 = [1,2,3];
-    this.category3 = [1,2,3];
+    this.taskService.getAllHome().subscribe({
+      next: (tasks) => (this.homeTasks = tasks)
+    }); 
+    
+    this.taskService.getAllSchool().subscribe({
+      next: (tasks) => (this.schoolTasks = tasks)
+    });  
+    
+  }
+
+  constructor(private router: Router, private taskService: TaskService){
+   
   }
 
   navigateToNewTask(){
-    this.router.navigate(['edit']);
+    this.router.navigate(['edit/new']);
   }
 
 }

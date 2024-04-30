@@ -3,24 +3,27 @@
 </div>
 
 <div class="widget-container">
-    <div>
-        <mat-label>Work</mat-label>
+    <div class="category-container">
+        <mat-label *ngIf="workTasks && workTasks.length > 0">Work</mat-label>
         <div class="task-cards">
-            <task-card-widget *ngFor="let num of category1"></task-card-widget>
+            <task-card-widget *ngFor="let task of workTasks" [task]="task"></task-card-widget>
         </div>
     </div>
-    <div>
-        <mat-label>School</mat-label>
+
+    <div class="category-container">
+        <mat-label *ngIf="homeTasks && homeTasks.length > 0">Home</mat-label>
         <div class="task-cards">
-            <task-card-widget *ngFor="let num of category2"></task-card-widget>
+            <task-card-widget *ngFor="let task of homeTasks" [task]="task"></task-card-widget>
         </div>
     </div>
-    <div>
-        <mat-label>Home</mat-label>
+
+    <div class="category-container">
+        <mat-label *ngIf="schoolTasks && schoolTasks.length > 0">School</mat-label>
         <div class="task-cards">
-            <task-card-widget *ngFor="let num of category3"></task-card-widget>
+            <task-card-widget *ngFor="let task of schoolTasks" [task]="task"></task-card-widget>
         </div>
     </div>
+    
     
     <div class="reminders-container">
         <mat-card>

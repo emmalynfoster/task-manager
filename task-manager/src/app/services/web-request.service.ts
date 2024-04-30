@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class WebRequestService {
     this.ROOT_URL= 'http://localhost:3000';
   }
 
-  get(uri: string) {
+  get(uri: string): Observable<any> {
     return this.http.get(`${this.ROOT_URL}/${uri}`);
   }
 
