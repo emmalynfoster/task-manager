@@ -14,7 +14,7 @@ export class TaskCardWidget {
   constructor(private router: Router) { }
 
   navigateToEdit(): void {
-    this.router.navigate(['edit']);
+    this.router.navigate(['edit/:id']);
   }
 
   // for display on each widget using frontend services

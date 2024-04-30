@@ -35,10 +35,10 @@ export class TaskService {
   }
 
   //Create a new task using webRequestService.post
-  createTask(title: string, description: string, due_date: string, completed: number, category: string) {
-    console.log({title, description, due_date, completed, category});
+  createTask(title: string, due_date: string, description: string, completed: number, category: string) {
+    console.log({title, due_date, description, completed, category});
     // send a web request to create a task
-    return this.webRequestService.post('tasks', {title, description, due_date, completed, category});
+    return this.webRequestService.post('tasks', {title, due_date, description, completed, category});
   }
 
 

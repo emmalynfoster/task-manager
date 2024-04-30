@@ -66,7 +66,6 @@ export class EditTaskComponent {
   onSubmit(){
     if(this.task_editor_form.valid){
       if(this.isNew){
-        console.log(this.task_editor_form.value.task_name);
         this.taskService
         .createTask(
           this.task_editor_form.value.task_name!, 
@@ -84,8 +83,8 @@ export class EditTaskComponent {
           .updateTask(
             this.id,
             this.task_editor_form.value.task_name!,
-            this.task_editor_form.value.description!,
             this.task_editor_form.value.due_date!,
+            this.task_editor_form.value.description!,
             0,
             this.task_editor_form.value.category!
           )
