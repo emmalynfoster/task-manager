@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-label>Reminders</mat-label>
+    <mat-label><strong>Reminders</strong></mat-label>
     <div class="list">
         <mat-checkbox *ngFor="let reminder of reminders"  [(ngModel)]="reminder.checked">
             <p> {{ reminder.text }}</p>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Route } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { TaskCardWidget } from '../task-card/task-card.widget';
 import { SharedModule } from '../shared.module';
 import { RemindersWidget } from '../reminders/reminders.widget';
@@ -19,19 +19,14 @@ export class HomePageComponent {
   public category3: number[];
 
 
-  constructor(private taskService: TaskService){
+  constructor(private router: Router){
     this.category1 = [1,2,3,4,5,6];
     this.category2 = [1,2,3];
     this.category3 = [1,2,3];
   }
 
-  //This method will be used as an evet handler for a New task button 
-  createNewTask() {
-    this.taskService.createTask("Comp 426", "finish final project", "2024-04-30", 0, "SCHOOL").subscribe((response: any) => {
-      //Make sure the response is correct on console, then check and make sure it is working in postman
-      //* Curently this is not working
-      console.log(response);
-    });
+  navigateToNewTask(){
+    this.router.navigate(['edit']);
   }
 
 }
