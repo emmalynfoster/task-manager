@@ -13,6 +13,22 @@ export class TaskService {
     return this.webRequestService.get('tasks');
   }
 
+  getAllSchool() {
+    return this.webRequestService.get('tasks/school');
+  }
+
+  getAllHome() {
+    return this.webRequestService.get('tasks/home');
+  }
+
+  getAllWork() {
+    return this.webRequestService.get('tasks/work');
+  }
+
+  getAllIDs() {
+    return this.webRequestService.get('tasks/all');
+  }
+
   //Get a task by id
   getTaskById(id: number) {
     return this.webRequestService.get('tasks/' + id);
