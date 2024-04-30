@@ -8,5 +8,8 @@ export class ReminderService {
 
   constructor(private webRequestService: WebRequestService) { }
 
-  //Use webRequestService to implement methods similar to the ones in task.service.ts
+  //Get all tasks in database
+  getReminders() {
+    return this.webRequestService.get('reminders');
+  }
 }
