@@ -6,56 +6,20 @@
 
     <form [formGroup]="login_form">
         <mat-card>
+            <mat-label style="font-size: 25px;">Log in</mat-label>
+            <p>*If your username has not been entered before, an account will be provided for you</p>
             <mat-form-field
                 appearance="outline"
                 color="accent"
             >
-            <mat-label>Email or Username</mat-label>
+            <mat-label>Username</mat-label>
             <input
             matInput
             formControlName="login_username"
             name="login_username" />
             </mat-form-field>
-            <mat-form-field
-            appearance="outline"
-            color="accent"
-            >
-            <mat-label>Password</mat-label>
-            <input
-            matInput
-            formControlName="login_password"
-            name="login_password" />
-            </mat-form-field>
+            <mat-slide-toggle formControlName="dark_mode"  (change)="toggleDarkMode()">Dark Mode?</mat-slide-toggle>
             <button mat-stroked-button (click)="navigateToMyTasks()" type="submit" style="margin-bottom: 10px;">Log in</button>
-            <p>No account? Sign up below</p>
-        </mat-card>
-    </form>
-
- 
-
-    <form [formGroup]="signup_form">
-        <mat-card>
-            <mat-form-field
-                appearance="outline"
-                color="accent"
-            >
-            <mat-label>Email or Username</mat-label>
-            <input
-            matInput
-            formControlName="signup_username"
-            name="signup_username" />
-            </mat-form-field>
-            <mat-form-field
-            appearance="outline"
-            color="accent"
-            >
-            <mat-label>Password</mat-label>
-            <input
-            matInput
-            formControlName="signup_password"
-            name="signup_password" />
-            </mat-form-field>
-            <button mat-stroked-button (click)="navigateToMyTasks()" type="submit">Sign Up</button>
         </mat-card>
     </form>
 

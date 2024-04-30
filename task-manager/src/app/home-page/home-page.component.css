@@ -25,7 +25,7 @@
     position: relative;
 }
 
-.reminders-widget {
+.reminders-container {
     position: absolute;
     top: 0;
     right: 0;
@@ -37,4 +37,11 @@ mat-label{
     font-family: OpenSans, sans-serif;
     color: #B80454;
     font-size: 20px;
+    margin-left: 5px;
+}
+
+button{
+    background-color: #8EDEBD;
+    color: white !important;
+    border: none;
 }
