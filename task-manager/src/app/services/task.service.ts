@@ -14,7 +14,7 @@ export class TaskService {
   }
 
   //Get all tasks in database
-  getTask(id ?: number) {
+  getTask(id: number) {
     return this.webRequestService.get('tasks/' + id);
   }
 
@@ -29,7 +29,6 @@ export class TaskService {
     return this.webRequestService.put('tasks/' + id, {title, description, due_date, complete, category});
   }
 
-  // 
   deleteTask(id ?: number) {
     return this.webRequestService.delete('tasks/' + id);
   }
