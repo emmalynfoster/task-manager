@@ -5,14 +5,14 @@
     <div class="widget-container">
         <!--place holders for when services are implemented-->
         <div class="name-and-category">
-            <p class="task-name">Make widget</p>
+            <p class="task-name">{{ task.title }}</p>
             <svg class="category-icon" viewBox="0 0 10 10">
                 <circle cx="5" cy="5" r="3" fill="#B80454"></circle>
             </svg>
-            <p>School</p>
+            <p>{{ task.category }}</p>
         </div>
-        <p>Due Date: 4/30/2024</p>
-        <p>Make widget for project</p>
+        <p>Due Date: {{ task.due_date }}</p>
+        <p>{{ task.description }}</p>
         <div class="button-container">
             <label class="container">    
                 <input type="checkbox" class="checkbox">
