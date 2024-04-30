@@ -8,12 +8,39 @@ const port = 3000
 
 app.use(bodyParser.json())
 
+//Adding cores headers
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
+
 // TASK API
 
 // Retrieve array of all tasks
 
 app.get('/tasks', async (req, res) => {
     let result = await Task.getAllTasks();
+    res.json(result.map((task)=> task.json()));
+})
+
+app.get('/tasks/school', async (req, res) => {
+    let result = await Task.getAllSchool();
+    res.json(result.map((task)=> task.json()));
+})
+
+app.get('/tasks/home', async (req, res) => {
+    let result = await Task.getAllHome();
+    res.json(result.map((task)=> task.json()));
+})
+
+app.get('/tasks/all', async (req, res) => {
+    let result = await Task.getAllIDs();
+    res.json(result);
+})
+
+app.get('/tasks/work', async (req, res) => {
+    let result = await Task.getAllWork();
     res.json(result.map((task)=> task.json()));
 })
 
@@ -63,6 +90,17 @@ app.post('/reminders', async (req, res) => {
     let reminder = await Reminder.create(req.body);
     if(!reminder) { res.status(400).send("Bad request"); }
     else { res.status(201).json(reminder.json()); }
+})
+
+app.put('/reminders', async (req, res) => {
+    let reminder = await Reminder.create(req.params.id);
+    if (reminder !== null) {
+        if (req.body !== undefined){
+            let new_reminder = await reminder.setNote(req.body.note);
+            res.status(200).json(new_reminder.json());
+    }
+    else { res.status(400).send("Bad request"); }
+}
 })
 
 app.delete('/reminders/:id', async (req, res) => {

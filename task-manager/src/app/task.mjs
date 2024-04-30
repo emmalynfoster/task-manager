@@ -62,6 +62,33 @@ export class Task {
         catch (e) { return []; }
     }
 
+    static async getAllSchool(){
+        let tasks = [];
+        try {
+            tasks = await db.all("SELECT * from tasks Where category == 'SCHOOL'")
+            return tasks.map((item)=> new Task(item.id, item.title, item.description, item.due_date, item.complete, item.category));
+        }
+        catch (e) { return []; }
+    }
+
+    static async getAllHome(){
+        let tasks = [];
+        try {
+            tasks = await db.all("SELECT * from tasks Where category == 'HOME'")
+            return tasks.map((item)=> new Task(item.id, item.title, item.description, item.due_date, item.complete, item.category));
+        }
+        catch (e) { return []; }
+    }
+
+    static async getAllWork(){
+        let tasks = [];
+        try {
+            tasks = await db.all("SELECT * from tasks Where category == 'WORK'")
+            return tasks.map((item)=> new Task(item.id, item.title, item.description, item.due_date, item.complete, item.category));
+        }
+        catch (e) { return []; }
+    }
+
     static async getTask(id){
         try {
             let row = await db.get('Select * from tasks where id = ?', id);

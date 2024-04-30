@@ -3,6 +3,7 @@ import { Route, Router } from '@angular/router';
 import { TaskCardWidget } from '../task-card/task-card.widget';
 import { SharedModule } from '../shared.module';
 import { RemindersWidget } from '../reminders/reminders.widget';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-home-page',
@@ -29,7 +30,6 @@ export class HomePageComponent {
   navigateToNewTask(){
     this.router.navigate(['edit']);
   }
-  
 
   async getActivity() {
     try {
@@ -59,5 +59,4 @@ export class HomePageComponent {
 }
 
 }
-
-
+}
