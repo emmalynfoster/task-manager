@@ -62,7 +62,11 @@ export class HomePageComponent {
 
   handleClick(){
     this.getActivity().then(data => {
-      this.suggestion = data + '.';
+      if (data == null){
+        this.suggestion = "Sorry, a suggestion could not be retrieved. Try again later.";
+      }
+      else{ this.suggestion = data + '.'; }
+      
     }).catch(error => {
       this.suggestion = "Sorry, a suggestion could not be retrieved. Try again later.";
       console.error("Error fetching text data:", error);
