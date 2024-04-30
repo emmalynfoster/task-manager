@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SharedModule } from '../shared.module';
 import { Router } from '@angular/router';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { ReminderService } from '../services/reminder.service';
 
 @Component({
   selector: 'reminders-widget',
@@ -11,15 +12,24 @@ import { MatCheckbox } from '@angular/material/checkbox';
   styleUrl: './reminders.widget.css'
 })
 export class RemindersWidget {
-  public reminders: {text: string, checked: boolean}[];
+  @Input() reminder!: any;
 
-  constructor(private router: Router){
-    this.reminders = [
-      { text: "Project due soon", checked: false },
-      { text: "Do laundry", checked: false },
-      { text: "Meeting 4/29", checked: false },
-      { text: "hello my name is", checked: false }
-    ];
+  //public reminders: {text: string, checked: boolean}[];
+  reminders!: any[];
+
+  ngOnInit() {
+    this.reminderService.getReminders().subscribe({
+      next: (reminders) => (this.reminders = reminders)
+    });
+  }
+
+  constructor(private router: Router, private reminderService: ReminderService){
+    // this.reminders = [
+    //   { text: "Project due soon", checked: false },
+    //   { text: "Do laundry", checked: false },
+    //   { text: "Meeting 4/29", checked: false },
+    //   { text: "hello my name is", checked: false }
+    // ];
   }
 
   navigateToEdit(): void {
@@ -29,7 +39,7 @@ export class RemindersWidget {
   addReminder(){}
 
   //tell parent to delete reminders
-  deleteCompleted(){
-    this.reminders = this.reminders.filter(reminder => !reminder.checked);
-  }
+  // deleteCompleted(){
+  //   this.reminders = this.reminders.filter(reminder => !reminder.checked);
+  // }
 }

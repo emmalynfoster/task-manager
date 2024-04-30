@@ -4,6 +4,7 @@ import { TaskCardWidget } from '../task-card/task-card.widget';
 import { SharedModule } from '../shared.module';
 import { RemindersWidget } from '../reminders/reminders.widget';
 import { TaskService } from '../services/task.service';
+import { ReminderService } from '../services/reminder.service';
 
 @Component({
   selector: 'app-home-page',
@@ -22,7 +23,7 @@ export class HomePageComponent {
   ngOnInit(){
     this.taskService.getAllWork().subscribe({
       next: (tasks) => (this.workTasks = tasks)
-    })
+    });
   }
 
   constructor(private router: Router, private taskService: TaskService){
