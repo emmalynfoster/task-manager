@@ -45,3 +45,24 @@ button{
     color: white !important;
     border: none;
 }
+
+.category-container {
+    width: 100%; /* Each category takes the full width */
+    margin-bottom: 20px; /* Adds space between categories */
+}
+
+.activity-suggestion{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+#suggestion{
+    margin-left: 10px;
+    font-family: OpenSans, sans-serif;
+    color: white !important;
+}
+
+.suggestion-card{
+    background-color: #9E8EDE;
+    padding: 5px;
+}

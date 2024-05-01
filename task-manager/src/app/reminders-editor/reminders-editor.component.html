@@ -2,7 +2,7 @@
     <span class="page-name">New Reminder</span>
 </div>
 
-<form [formGroup]="new_reminder">
+<form [formGroup]="new_reminder" (ngSubmit)="onSubmit()">
     <mat-card>
         <mat-form-field>
         <mat-label>Reminder</mat-label>

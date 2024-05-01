@@ -13,3 +13,4 @@ export class DarkModeService {
   setDarkMode(mode: boolean) {
     this.isDarkMode = mode
   }
+}

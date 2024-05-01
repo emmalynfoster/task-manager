@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SharedModule } from '../shared.module';
-import { Router } from '@angular/router';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { ReminderService } from '../services/reminder.service';
 
 @Component({
   selector: 'reminders-widget',
@@ -11,25 +12,42 @@ import { MatCheckbox } from '@angular/material/checkbox';
   styleUrl: './reminders.widget.css'
 })
 export class RemindersWidget {
-  public reminders: {text: string, checked: boolean}[];
+  @Input() reminders!: any[];
 
-  constructor(private router: Router){
-    this.reminders = [
-      { text: "Project due soon", checked: false },
-      { text: "Do laundry", checked: false },
-      { text: "Meeting 4/29", checked: false },
-      { text: "hello my name is", checked: false }
-    ];
+
+  id: number = -1
+
+  constructor(private router: Router, 
+    private reminderService: ReminderService, 
+    private route: ActivatedRoute){
+      this.id = this.route.snapshot.params['id'];
+  }
+
+  ngOnInit() {
+    this.reminderService.getReminders().subscribe({
+      next: (reminders) => (this.reminders = reminders)
+    });
   }
 
   navigateToEdit(): void {
     this.router.navigate(['/reminders/editor']);
   }
 
-  addReminder(){}
-
   //tell parent to delete reminders
-  deleteCompleted(){
-    this.reminders = this.reminders.filter(reminder => !reminder.checked);
+  deleteCompleted() {
+    this.reminderService.deleteCheckedReminders().subscribe({
+      next: () =>  (this.reminderService.getReminders().subscribe({
+        next: (reminders) => (this.reminders = reminders)
+      }))
+    });
+  }
+
+  updateReminderChecked(event: MatCheckboxChange, reminderID: number) {
+    let checked: number = event.checked ? 1 : 0;
+    this.reminderService.updateChecked(reminderID, checked).subscribe({
+      next: () =>  (this.reminderService.getReminders().subscribe({
+        next: (reminders) => (this.reminders = reminders)
+      }))
+    });
   }
 }
