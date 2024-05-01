@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { Task } from '../task-manager/src/app/task.mjs'
 import { Reminder } from '../task-manager/src/app/reminder.mjs';
+import { User } from '../task-manager/src/app/user.mjs';
 
 const app = express()
 const port = 3000
@@ -111,6 +112,57 @@ app.delete('/reminders', async (req, res) => {
     let deleted = await Reminder.deleteCheckedReminders();
     if(deleted){ res.status(200).json("Reminders deleted"); }
     else{ res.status(400).send("Delete failed"); }
+})
+
+
+// USERS API
+
+//get user by name, return user json
+app.get('/users/:name', async (req,res) => {
+    let result = await User.getByName(req.params.name)
+    if(result == null){ res.status(404).send("User not found")}
+    else{ res.json(result.json()) }
+})
+
+
+// get user preference by name
+// return 0 if user doesn't exist
+// otherwise returns either 0 or 1 (how preference is stored)
+app.get('/preference/:name', async (req, res) => {
+    let result = await User.getByName(req.params.name)
+    if( result == null ){ res.status(200).json({dark_mode: 0})}
+    else{ res.status(200).json({dark_mode: result.getMode()}) }
+})
+
+// make a new user, sends error if a user by that name already exists
+// expects form {name: {whatever the name is}, dark_mode: 0 or 1}
+app.post('/users', async (req, res) => {
+    /*
+    if (await User.getByName(req.body.name)){
+        res.status(400).send("Bad request, user already exists")
+        return
+    }
+    */
+    let user = await User.create(req.body)
+    if (! user){res.status(400).send("bad request")}
+    else {res.status(201).json(user.json())}
+})
+
+// put user preference by name
+//expects user preference in body either 0 or 1 as dark_mode
+app.put('/users/:name', async (req, res) => {
+    let user = await User.getByName(req.params.name)
+    if (! user){
+        res.status(404).send("user not found");
+        return
+    }
+    
+    user = await User.updatePreference(req.params.name, req.body.dark_mode)
+    if(!user){
+        res.status(400).send("Bad Request");
+        return;
+    }
+    res.status(200).json(user.json())
 })
 
 app.listen(port, () => {
