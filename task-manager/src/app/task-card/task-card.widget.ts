@@ -14,21 +14,8 @@ export class TaskCardWidget {
   constructor(private router: Router) { }
 
   navigateToEdit(): void {
-    this.router.navigate(['edit']);
+    this.router.navigate(['edit', this.task.id]);
   }
 
-  // for display on each widget using frontend services
-  getTaskTitle(){}
-
-  getTaskCategory(){}
-
-  getTaskDescription(){}
-
-  getDueDate(){}
-
-  getIsComplete(){}
-
-  // update object to complete, if checked vs. not checked
-  onCheck(){}
 
 }

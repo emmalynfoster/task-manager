@@ -6,10 +6,12 @@
         <!--place holders for when services are implemented-->
         <div class="name-and-category">
             <p class="task-name">{{ task.title }}</p>
-            <svg class="category-icon" viewBox="0 0 10 10">
-                <circle cx="5" cy="5" r="3" fill="#B80454"></circle>
-            </svg>
-            <p>{{ task.category }}</p>
+            <div class="category-and-icon">
+                <svg class="category-icon" viewBox="0 0 10 10">
+                    <circle cx="5" cy="5" r="3" fill="#B80454"></circle>
+                </svg>
+                <p class="category">{{ task.category }}</p>
+            </div>
         </div>
         <p>Due Date: {{ task.due_date }}</p>
         <p>{{ task.description }}</p>

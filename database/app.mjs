@@ -70,8 +70,11 @@ app.put('/tasks/:id', async (req, res) => {
 
 app.delete('/tasks/:id', async (req, res) => {
     let deleted = await Task.deleteTask(req.params.id)
-    if (deleted){ res.status(200).send("Task deleted"); }
-    else{ res.status(400).send("Delete failed"); }
+    if (deleted){ 
+        res.status(200).json("Task Deleted"); 
+    } else{ 
+        res.status(400).send("Delete failed"); 
+    }
 })
 
 
