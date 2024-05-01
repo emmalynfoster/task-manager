@@ -1,7 +1,7 @@
 <mat-card>
     <mat-label><strong>Reminders</strong></mat-label>
     <div class="list">
-        <mat-checkbox *ngFor="let reminder of reminders" [(ngModel)]="reminder.checked">
+        <mat-checkbox *ngFor="let reminder of reminders" [(ngModel)]="reminder.checked" (change)="updateReminderChecked($event)">
             <p> {{ reminder.note }}</p>
         </mat-checkbox>
     </div>

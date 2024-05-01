@@ -17,8 +17,8 @@ export class ReminderService {
     return this.webRequestService.get('reminders/' + id);
   }
 
-  createNote(note: string) {
-    return this.webRequestService.post('reminders', {note});
+  createNote(note: string, checked: number) {
+    return this.webRequestService.post('reminders', {note, checked});
   }
 
   updateChecked(id: number, checked: number) {

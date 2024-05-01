@@ -34,7 +34,7 @@ export class RemindersEditorComponent {
 
   onSubmit(){
     if(this.reminder_editor_form.valid) {
-      this.reminderService.createNote(this.reminder_editor_form.value.note!)
+      this.reminderService.createNote(this.reminder_editor_form.value.note!, 0)
       .subscribe({
         next: () => (this.onSuccess()),
         error: (err) => (this.onError(err))
