@@ -42,9 +42,9 @@ export class RemindersWidget {
     });
   }
 
-  updateReminderChecked(event: MatCheckboxChange) {
+  updateReminderChecked(event: MatCheckboxChange, reminderID: number) {
     let checked: number = event.checked ? 1 : 0;
-    this.reminderService.updateChecked(this.id, checked).subscribe({
+    this.reminderService.updateChecked(reminderID, checked).subscribe({
       next: () =>  (this.reminderService.getReminders().subscribe({
         next: (reminders) => (this.reminders = reminders)
       }))
