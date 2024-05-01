@@ -6,6 +6,9 @@ Last Updated: 4/23/2024_
 This project encompasses a task manager, including the ability to create, complete, edit, and delete tasks for certain categories. 
 It also includes a to-do list feature for more general tasks, with the ability to create and delete as to-dos are completed. 
 
+## Demo Video
+https://youtu.be/5liUdQGAo-I
+
 ## Codebase
 This application will be implemented in Angular and Javascript, using HttpClient in the Frontend Service and an SQLite database.  <br>
 <br>
