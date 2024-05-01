@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../shared.module';
+import { TaskService } from '../services/task.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-task',
@@ -15,7 +17,7 @@ import { SharedModule } from '../shared.module';
 export class EditTaskComponent {
 
   public static Route: Route = {
-    path:'edit',
+    path:'edit/:id',
     component: EditTaskComponent,
     title: 'Task Editor'
   };
@@ -25,7 +27,11 @@ export class EditTaskComponent {
   description = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
   //change to set to task property categories
-  categories = ["HOME", "WORK","SCHOOL"];
+  protected categories = ["HOME", "WORK","SCHOOL"];
+
+  id: number = -1;
+
+  isNew: boolean = false;
 
   public task_editor_form = this.formBuilder.group({
     task_name: this.task_name,
@@ -33,18 +39,75 @@ export class EditTaskComponent {
     description: this.description,
     category: this.category
   });
-
   constructor(
-    protected formBuilder: FormBuilder
+    protected formBuilder: FormBuilder,
+    private taskService: TaskService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
   ){
-    this.task_editor_form.setValue({
-      task_name: "Task 1",
-      due_date: "4/30/24",
-      description: "Task",
-      category: "School"
-   });
+    this.isNew = route.snapshot.params['id'] == 'new';
+
+    if(!this.isNew){
+      this.id = route.snapshot.params[':id'];
+      this.taskService.getTaskById(this.id).subscribe({
+        next: (taskData) => {
+          this.task_editor_form.setValue({
+            task_name: taskData.title,
+            due_date: taskData.due_date,
+            description: taskData.description,
+            category: taskData.category
+          });
+        }
+      });
+    }
   }
 
-  onSubmit(){}
+  onSubmit(){
+    if(this.task_editor_form.valid){
+      if(this.isNew){
+        this.taskService
+        .createTask(
+          this.task_editor_form.value.task_name!, 
+          this.task_editor_form.value.due_date!, 
+          this.task_editor_form.value.description!,
+          0, 
+          this.task_editor_form.value.category!
+        )
+        .subscribe({
+          next: () => (this.onSuccess()),
+          error: (err) => (this.onError(err))
+        });
+      } else {
+        this.taskService
+          .updateTask(
+            this.id,
+            this.task_editor_form.value.task_name!,
+            this.task_editor_form.value.due_date!,
+            this.task_editor_form.value.description!,
+            0,
+            this.task_editor_form.value.category!
+          )
+          .subscribe({
+            next: () => (this.onSuccess()),
+            error: (err) => (this.onError(err))
+          });
+      }
+    } else {
+      this.snackBar.open("Please enter the values in the form correctly", '', { duration: 2000 })
+    }
+  }
 
+  onSuccess(){
+    this.router.navigate(['tasks']);
+    this.snackBar.open("Task Created!", '', { duration: 2000 })
+  }
+  onError(error: any){
+    if (this.isNew) {
+      console.log(error);
+      this.snackBar.open('Error: Task Not Created', '', { duration: 2000 });
+    } else {
+      this.snackBar.open('Error: Task Not Edited', '', { duration: 2000 });
+    }
+  }
 }

@@ -9,4 +9,7 @@ export class DarkModeService {
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
   }
-}
+
+  setDarkMode(mode: boolean) {
+    this.isDarkMode = mode
+  }

@@ -4,7 +4,7 @@
 
 <div class="form-container">
 
-    <form [formGroup]="login_form">
+    <form [formGroup]="login_form" (ngSubmit)="onSubmit()">
         <mat-card>
             <mat-label style="font-size: 25px;">Log in</mat-label>
             <p>*If your username has not been entered before, an account will be provided for you</p>
@@ -19,7 +19,7 @@
             name="login_username" />
             </mat-form-field>
             <mat-slide-toggle formControlName="dark_mode"  (change)="toggleDarkMode()">Dark Mode?</mat-slide-toggle>
-            <button mat-stroked-button (click)="navigateToMyTasks()" type="submit" style="margin-bottom: 10px;">Log in</button>
+            <button mat-stroked-button type="submit" style="margin-bottom: 10px;">Log in</button>
         </mat-card>
     </form>
 

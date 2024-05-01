@@ -3,6 +3,7 @@ import { Route, Router } from '@angular/router';
 import { TaskCardWidget } from '../task-card/task-card.widget';
 import { SharedModule } from '../shared.module';
 import { RemindersWidget } from '../reminders/reminders.widget';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,21 +14,24 @@ import { RemindersWidget } from '../reminders/reminders.widget';
 })
 export class HomePageComponent {
   public static Route: Route = {path: 'tasks', component: HomePageComponent};
-  public category1: number[];
-  public category2: number[];
-  public category3: number[];
+  
+  workTasks!: any[];
+  homeTasks!: any[];
+  schoolTasks!: any[];
 
-
-  constructor(private router: Router){
-    this.category1 = [1,2,3,4,5,6];
-    this.category2 = [1,2,3];
-    this.category3 = [1,2,3];
+  ngOnInit(){
+    this.taskService.getAllWork().subscribe({
+      next: (tasks) => (this.workTasks = tasks)
+    })
   }
 
+  constructor(private router: Router, private taskService: TaskService){
+   
+  }
+
+
   navigateToNewTask(){
-    this.router.navigate(['edit']);
+    this.router.navigate(['edit/new']);
   }
 
 }
-
-

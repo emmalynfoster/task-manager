@@ -6,21 +6,10 @@
     <div>
         <mat-label>Work</mat-label>
         <div class="task-cards">
-            <task-card-widget *ngFor="let num of category1"></task-card-widget>
+            <task-card-widget *ngFor="let task of workTasks" [task]="task"></task-card-widget>
         </div>
     </div>
-    <div>
-        <mat-label>School</mat-label>
-        <div class="task-cards">
-            <task-card-widget *ngFor="let num of category2"></task-card-widget>
-        </div>
-    </div>
-    <div>
-        <mat-label>Home</mat-label>
-        <div class="task-cards">
-            <task-card-widget *ngFor="let num of category3"></task-card-widget>
-        </div>
-    </div>
+    
     
     <div class="reminders-container">
         <mat-card>
@@ -28,5 +17,6 @@
         </mat-card>
         <reminders-widget class="reminders-widget"></reminders-widget>
     </div>
- 
+
+     
 </div>

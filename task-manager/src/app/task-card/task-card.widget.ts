@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedModule } from '../shared.module';
 
@@ -10,11 +10,11 @@ import { SharedModule } from '../shared.module';
   styleUrl: './task-card.widget.css'
 })
 export class TaskCardWidget {
-
+  @Input() task!: any;
   constructor(private router: Router) { }
 
   navigateToEdit(): void {
-    this.router.navigate(['edit']);
+    this.router.navigate(['edit/:id']);
   }
 
   // for display on each widget using frontend services
