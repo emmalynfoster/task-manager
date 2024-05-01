@@ -9,5 +9,5 @@ await db.run(`CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, descriptio
 
 await db.run('CREATE TABLE reminders (id INTEGER PRIMARY KEY, note TEXT)');
 await db.run('CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, dark_mode BOOLEAN NOT NULL CHECK (dark_mode IN (0,1)))')
-
+// w7PHQ1iI
 db.close();

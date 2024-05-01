@@ -133,10 +133,12 @@ app.get('/preference/:name', async (req, res) => {
 // make a new user, sends error if a user by that name already exists
 // expects form {name: {whatever the name is}, dark_mode: 0 or 1}
 app.post('/users', async (req, res) => {
+    /*
     if (await User.getByName(req.body.name)){
         res.status(400).send("Bad request, user already exists")
         return
     }
+    */
     let user = await User.create(req.body)
     if (! user){res.status(400).send("bad request")}
     else {res.status(201).json(user.json())}
