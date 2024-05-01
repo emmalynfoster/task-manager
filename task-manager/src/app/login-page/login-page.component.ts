@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, Validators, ReactiveFormsModule, Form } from 
 import { DarkModeService } from '../app-dark-mode-service';
 import { UserService } from '../services/user.service';
 
+
 @Component({
   selector: 'app-login-page',
   standalone: true,
@@ -40,6 +41,7 @@ export class LoginPageComponent {
   navigateToMyTasks(): void {
     this.router.navigate(['tasks']);
   }
+
   
   onSubmit(){  
     if(this.login_form.valid){
@@ -61,6 +63,7 @@ export class LoginPageComponent {
       next: () => (this.navigateToMyTasks())
     })
   }
+
 
   toggleDarkMode(): void {
     console.log('Toggling dark mode...');

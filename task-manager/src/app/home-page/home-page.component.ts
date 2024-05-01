@@ -29,6 +29,7 @@ export class HomePageComponent {
    
   }
 
+
   navigateToNewTask(){
     this.router.navigate(['edit/new']);
   }
